@@ -22,20 +22,20 @@ input::placeholder{color:#9a9183}
 </helmet>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c1916"></rect><text x="50" y="64" text-anchor="middle" font-family="Georgia,serif" font-size="44" fill="#d9b56a">bc</text></svg></template>
 
-<div ref="{{ rootRef }}" style="position:relative;min-height:100vh;background:#f3eee5;font-family:'Libre Caslon Text',Georgia,serif;color:#1c1916">
+<div ref="{{ rootRef }}" style="{{ themeVars }}position:relative;min-height:100vh;transition:background-color .6s ease,color .6s ease;background:var(--paper,#f3eee5);font-family:'Libre Caslon Text',Georgia,serif;color:var(--ink,#1c1916)">
 
-  <header style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:14px clamp(18px,4vw,56px);background:rgba(243,238,229,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #ddd4c4">
+  <header style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:14px clamp(18px,4vw,56px);background:var(--hdr,rgba(243,238,229,0.94));backdrop-filter:blur(8px);border-bottom:1px solid var(--rule,#ddd4c4)">
     <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none">
-      <span style="width:34px;height:34px;background-image:url(assets/batcat-mono.png);background-size:250%;background-position:50.5% 45.6%;mix-blend-mode:multiply"></span>
+      <span style="width:34px;height:34px;background-image:url(assets/batcat-mono.png);background-size:250%;background-position:50.5% 45.6%;mix-blend-mode:{{ hdrBlend }};filter:{{ hdrFilter }}"></span>
       <span style="font-family:'Libre Caslon Display',serif;font-size:24px;letter-spacing:.01em">batcat</span>
     </a>
     <nav style="display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em">
-      <a href="#projects" onClick="{{ goProjects }}" style="text-decoration:none;color:#5f574c">projects</a>
-      <a href="#journals" onClick="{{ goJournals }}" style="text-decoration:none;color:#5f574c">journals</a>
-      <a href="#cat" onClick="{{ goCat }}" style="text-decoration:none;color:#5f574c">The Cats</a>
+      <a href="#projects" onClick="{{ goProjects }}" style="text-decoration:none;color:var(--mute,#5f574c)">projects</a>
+      <a href="#journals" onClick="{{ goJournals }}" style="text-decoration:none;color:var(--mute,#5f574c)">journals</a>
+      <a href="#cat" onClick="{{ goCat }}" style="text-decoration:none;color:var(--mute,#5f574c)">The Cats</a>
     </nav>
     <div style="display:flex;align-items:center;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:12px">
-      <span style="color:#9a9183;margin-right:6px">reading</span>
+      <span style="color:var(--mute3,#9a9183);margin-right:6px">reading</span>
       <sc-for list="{{ switcher }}" as="w" hint-placeholder-count="4">
         <button onClick="{{ w.select }}" style="display:flex;align-items:center;gap:6px;border:none;background:{{ w.bg }};color:{{ w.fg }};padding:6px 10px;border-radius:4px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;transition:background .2s">
           <span style="width:7px;height:7px;border-radius:50%;background:{{ w.color }}"></span>{{ w.label }}
@@ -45,7 +45,7 @@ input::placeholder{color:#9a9183}
   </header>
 
   <!-- HERO: day / night -->
-  <section id="top" style="position:relative;overflow:hidden;border-bottom:1px solid #ddd4c4">
+  <section id="top" style="position:relative;overflow:hidden;border-bottom:1px solid var(--rule,#ddd4c4)">
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,#17120b,#0a0806 65%);clip-path:circle({{ nightR }} at {{ nightX }} {{ nightY }});transition:clip-path .9s cubic-bezier(.6,0,.2,1)"></div>
     <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:clamp(32px,5vw,64px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto">
       <div style="position:relative;width:min(560px,88vw);aspect-ratio:1">
@@ -85,11 +85,14 @@ input::placeholder{color:#9a9183}
           <div style="display:flex;flex-direction:column;gap:6px">
             <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
               <span style="font-family:'Libre Caslon Display',serif;font-size:36px;line-height:1">{{ s.name }}</span>
-              <span style="font-style:italic;color:#7a7266">{{ s.legal }}</span>
+              <span style="font-style:italic;color:var(--mute2,#7a7266)">{{ s.legal }}</span>
             </div>
-            <p style="margin:0;font-size:17px;line-height:1.55;color:#4a443c;text-wrap:pretty">{{ s.bio }}</p>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:var(--body,#4a443c);text-wrap:pretty">{{ s.bio }}</p>
             <span style="font-family:Caveat,cursive;font-size:23px;color:{{ s.color }};line-height:1.2">now: {{ s.now }}</span>
-            <button onClick="{{ s.select }}" style="align-self:flex-start;margin-top:6px;background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">{{ s.cta }}</button>
+            <button onClick="{{ s.select }}" style="align-self:flex-start;margin-top:6px;background:none;border:none;border-bottom:1px solid var(--ink,#1c1916);padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink,#1c1916)">{{ s.cta }}</button>
+            <sc-if value="{{ s.hasAbout }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ s.aboutHref }}" style="align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mute2,#7a7266);text-decoration:none">about &amp; résumé →</a>
+            </sc-if>
           </div>
         </div>
       </sc-for>
@@ -97,30 +100,30 @@ input::placeholder{color:#9a9183}
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid #ddd4c4">
+  <section id="projects" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid var(--rule,#ddd4c4)">
     <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:40px">
       <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;margin:0">Projects</h2>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7266">{{ projLabel }}</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mute2,#7a7266)">{{ projLabel }}</span>
     </div>
-    <div style="columns:290px 3;column-gap:32px">
+    <div ref="{{ projRef }}" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:36px 32px;align-items:start">
       <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
-        <div onClick="{{ p.open }}" style="break-inside:avoid;display:inline-block;width:100%;margin:0 0 36px;cursor:pointer;background:#fbf9f4;padding:16px 16px 22px;box-sizing:border-box;box-shadow:0 1px 2px rgba(28,25,22,.08),0 10px 28px rgba(28,25,22,.05);transform:rotate({{ p.rot }});transition:transform .3s ease, box-shadow .3s;position:relative" style-hover="transform:rotate(0deg) translateY(-4px);box-shadow:0 2px 4px rgba(28,25,22,.1),0 18px 40px rgba(28,25,22,.1)">
+        <div onClick="{{ p.open }}" style="width:100%;backface-visibility:hidden;cursor:pointer;background:var(--card,#fbf9f4);padding:16px 16px 22px;box-sizing:border-box;box-shadow:0 1px 2px rgba(28,25,22,.08),0 10px 28px rgba(28,25,22,.05);transform:rotate({{ p.rot }});transition:transform .3s ease, box-shadow .3s;position:relative" style-hover="transform:rotate(0deg) translateY(-4px);box-shadow:0 2px 4px rgba(28,25,22,.1),0 18px 40px rgba(28,25,22,.1)">
           <span style="position:absolute;top:-10px;left:50%;width:84px;height:22px;transform:translateX(-50%) rotate({{ p.tape }});background:rgba(214,200,170,.55)"></span>
           <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}">
             <img src="{{ p.img }}" alt="{{ p.title }}" style="display:block;width:100%;aspect-ratio:{{ p.ratio }};object-fit:cover"></img>
           </sc-if>
           <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}">
-            <div style="aspect-ratio:{{ p.ratio }};background:repeating-linear-gradient(135deg,#e6dfd2 0 8px,#ede7dc 8px 16px);display:flex;align-items:flex-end;padding:10px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8577">{{ p.imgLabel }}</div>
+            <div style="aspect-ratio:{{ p.ratio }};background:repeating-linear-gradient(135deg,var(--ph1,#e6dfd2) 0 8px,var(--ph2,#ede7dc) 8px 16px);display:flex;align-items:flex-end;padding:10px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8577">{{ p.imgLabel }}</div>
           </sc-if>
           <div style="display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em">
             <span style="color:{{ p.color }}">{{ p.owners }}</span>
-            <span style="color:#7a7266">{{ p.status }} · {{ p.year }}</span>
+            <span style="color:var(--mute2,#7a7266)">{{ p.status }} · {{ p.year }}</span>
           </div>
           <h3 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:32px;line-height:1.05;margin:8px 0 8px">{{ p.title }}</h3>
-          <p style="margin:0;font-size:16px;line-height:1.55;color:#4a443c;text-wrap:pretty">{{ p.blurb }}</p>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:var(--body,#4a443c);text-wrap:pretty">{{ p.blurb }}</p>
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px">
             <span style="font-family:Caveat,cursive;font-size:22px;color:{{ p.color }}">{{ p.note }}</span>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266;white-space:nowrap">{{ p.logCount }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mute2,#7a7266);white-space:nowrap">{{ p.logCount }}</span>
           </div>
         </div>
       </sc-for>
@@ -128,52 +131,53 @@ input::placeholder{color:#9a9183}
   </section>
 
   <!-- JOURNALS -->
-  <section id="journals" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid #ddd4c4">
+  <section id="journals" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid var(--rule,#ddd4c4)">
     <div style="display:grid;grid-template-columns:{{ jCols }};gap:clamp(28px,5vw,80px);align-items:start">
-      <div style="display:flex;flex-direction:column;gap:22px;position:{{ jPos }};top:90px;background:#f3eee5;z-index:2">
+      <div style="display:flex;flex-direction:column;gap:22px;position:{{ jPos }};top:90px;background:var(--paper,#f3eee5);z-index:2">
         <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;margin:0">Journals</h2>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#4a443c;max-width:22em">Dated notes from inside the projects. Open any entry to read it in full.</p>
-        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">search
-          <input value="{{ q }}" onChange="{{ onQ }}" placeholder="cable, rover, lid…" style="font-family:'Libre Caslon Text',serif;font-size:18px;padding:10px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none"></input>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:var(--body,#4a443c);max-width:22em">Dated notes from inside the projects. Open any entry to read it in full.</p>
+        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mute2,#7a7266)">search
+          <input value="{{ q }}" onChange="{{ onQ }}" placeholder="cable, rover, lid…" style="font-family:'Libre Caslon Text',serif;font-size:18px;padding:10px 0;border:none;border-bottom:1px solid var(--ink,#1c1916);background:transparent;color:var(--ink,#1c1916);outline:none"></input>
         </label>
-        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">project
-          <select value="{{ projFilter }}" onChange="{{ onProj }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:9px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;cursor:pointer">
+        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mute2,#7a7266)">project
+          <select value="{{ projFilter }}" onChange="{{ onProj }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:9px 0;border:none;border-bottom:1px solid var(--ink,#1c1916);background:transparent;color:var(--ink,#1c1916);outline:none;cursor:pointer">
             <option value="all">All projects</option>
             <sc-for list="{{ projOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.title }}</option></sc-for>
           </select>
         </label>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7266">{{ journalLabel }}</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mute2,#7a7266)">{{ journalLabel }}</span>
         <sc-if value="{{ hasJFilters }}" hint-placeholder-val="{{ false }}">
-          <button onClick="{{ clearJ }}" style="align-self:flex-start;background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">clear filters</button>
+          <button onClick="{{ clearJ }}" style="align-self:flex-start;background:none;border:none;border-bottom:1px solid var(--ink,#1c1916);padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink,#1c1916)">clear filters</button>
         </sc-if>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:44px;min-width:0">
         <sc-for list="{{ months }}" as="m" hint-placeholder-count="2">
           <div style="display:flex;flex-direction:column">
-            <h3 style="font-family:'Libre Caslon Text',serif;font-style:italic;font-weight:400;font-size:22px;color:#7a7266;margin:0 0 6px">{{ m.label }}</h3>
+            <h3 style="font-family:'Libre Caslon Text',serif;font-style:italic;font-weight:400;font-size:22px;color:var(--mute2,#7a7266);margin:0 0 6px">{{ m.label }}</h3>
             <sc-for list="{{ m.items }}" as="e" hint-placeholder-count="3">
-              <div onClick="{{ e.toggle }}" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid #ddd4c4;cursor:pointer">
+              <div onClick="{{ e.toggle }}" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid var(--rule,#ddd4c4);cursor:pointer">
                 <span style="font-family:'Libre Caslon Display',serif;font-size:44px;line-height:.9;color:{{ e.color }}">{{ e.day }}</span>
                 <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
-                  <div style="display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7a7266">
+                  <div style="display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--mute2,#7a7266)">
                     <span style="color:{{ e.color }}">{{ e.who }}</span><span>{{ e.project }}</span><span>{{ e.read }}</span>
                   </div>
                   <span style="font-family:'Libre Caslon Display',serif;font-size:clamp(24px,2.4vw,32px);line-height:1.1">{{ e.title }}</span>
-                  <p style="margin:0;font-size:17px;line-height:1.6;color:#4a443c;text-wrap:pretty">{{ e.excerpt }}</p>
+                  <p style="margin:0;font-size:17px;line-height:1.6;color:var(--body,#4a443c);text-wrap:pretty">{{ e.excerpt }}</p>
                   <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
-                    <p style="margin:4px 0 0;font-size:17px;line-height:1.65;color:#2e2a25;text-wrap:pretty;white-space:pre-line">{{ e.body }}</p>
+                    <p style="margin:4px 0 0;font-size:17px;line-height:1.65;color:var(--body2,#2e2a25);text-wrap:pretty;white-space:pre-line">{{ e.body }}</p>
                     <sc-if value="{{ e.hasImages }}" hint-placeholder-val="{{ false }}">
                       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:10px;margin-top:6px">
                         <sc-for list="{{ e.images }}" as="im" hint-placeholder-count="2">
-                          <img src="{{ im.src }}" alt="" loading="lazy" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e6dfd2"></img>
+                          <img src="{{ im.src }}" alt="" loading="lazy" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--ph1,#e6dfd2)"></img>
                         </sc-for>
                       </div>
                     </sc-if>
                     <span style="font-family:Caveat,cursive;font-size:24px;color:{{ e.color }}">— {{ e.sign }}</span>
                   </sc-if>
                   <div style="display:flex;gap:16px;align-items:center">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916;text-decoration:underline;text-underline-offset:3px">{{ e.cta }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink,#1c1916);text-decoration:underline;text-underline-offset:3px">{{ e.cta }}</span>
+                    <a href="{{ e.href }}" target="_blank" rel="noopener" onClick="{{ e.stop }}" title="open in new tab" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mute2,#7a7266);text-decoration:none">open in new tab ↗</a>
                     <sc-if value="{{ admin }}" hint-placeholder-val="{{ false }}">
                       <button onClick="{{ e.edit }}" style="background:#e6c47a;border:none;cursor:pointer;padding:3px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916">edit</button>
                     </sc-if>
@@ -184,7 +188,7 @@ input::placeholder{color:#9a9183}
           </div>
         </sc-for>
         <sc-if value="{{ noEntries }}" hint-placeholder-val="{{ false }}">
-          <p style="font-family:Caveat,cursive;font-size:30px;color:#7a7266;margin:0">Nothing written about that yet.</p>
+          <p style="font-family:Caveat,cursive;font-size:30px;color:var(--mute2,#7a7266);margin:0">Nothing written about that yet.</p>
         </sc-if>
       </div>
     </div>
@@ -320,6 +324,61 @@ input::placeholder{color:#9a9183}
       <img src="assets/niangao-logo.png" alt="" style="width:24px;height:24px"></img>
     </span>
   </footer>
+
+  <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:45;overflow-y:auto;background:#f3eee5;color:#1c1916">
+      <div style="max-width:680px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:20px">
+        <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#1c1916;font-family:'IBM Plex Mono',monospace;font-size:12px">
+          <span style="width:30px;height:30px;background-image:url(assets/batcat-mono.png);background-size:250%;background-position:50.5% 45.6%;mix-blend-mode:multiply"></span>batcat · all journals
+        </a>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(16px,4vw,40px);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#7a7266">
+          <span style="color:{{ rd.color }}">{{ rd.who }}</span><span>{{ rd.date }}</span><span>{{ rd.project }}</span>
+        </div>
+        <h1 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1.02;margin:0;text-wrap:balance">{{ rd.title }}</h1>
+        <p style="margin:0;font-size:19px;line-height:1.7;color:#2e2a25;text-wrap:pretty;white-space:pre-line">{{ rd.body }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px">
+          <sc-for list="{{ rd.images }}" as="im" hint-placeholder-count="0">
+            <img src="{{ im.src }}" alt="" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e6dfd2"></img>
+          </sc-for>
+        </div>
+        <span style="font-family:Caveat,cursive;font-size:28px;color:{{ rd.color }}">— {{ rd.sign }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ aboutOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:45;overflow-y:auto;background:#f3eee5;color:#1c1916">
+      <div style="max-width:680px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:22px">
+        <a href="#top" onClick="{{ closeAbout }}" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#1c1916;font-family:'IBM Plex Mono',monospace;font-size:12px">
+          <span style="width:30px;height:30px;background-image:url(assets/batcat-mono.png);background-size:250%;background-position:50.5% 45.6%;mix-blend-mode:multiply"></span>← batcat
+        </a>
+        <span style="font-family:Caveat,cursive;font-size:34px;line-height:1;color:{{ ab.color }};margin-top:clamp(16px,4vw,40px);transform:rotate(-2deg);align-self:flex-start">{{ ab.id }}</span>
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <h1 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(44px,7vw,72px);line-height:1;margin:0">{{ ab.name }}</h1>
+          <span style="font-style:italic;font-size:20px;color:#7a7266">{{ ab.legal }}</span>
+        </div>
+        <p style="margin:0;font-size:19px;line-height:1.7;color:#2e2a25;text-wrap:pretty">{{ ab.bio }}</p>
+        <div style="display:flex;flex-direction:column;margin-top:18px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:1px solid #1c1916">
+            <span style="font-family:'Libre Caslon Display',serif;font-size:32px;line-height:1">Résumé</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">PDF · English / 中文</span>
+          </div>
+          <sc-for list="{{ ab.resumes }}" as="r" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid #ddd4c4">
+              <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+                <span style="font-family:'Libre Caslon Text',serif;font-size:21px">{{ r.label }}</span>
+                <span style="font-size:17px;color:#7a7266">{{ r.zh }}</span>
+              </div>
+              <div style="display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:12px">
+                <a href="{{ r.en }}" target="_blank" rel="noopener" style="color:#1c1916;text-decoration:underline;text-underline-offset:3px">English ↗</a>
+                <a href="{{ r.cn }}" target="_blank" rel="noopener" style="color:#1c1916;text-decoration:underline;text-underline-offset:3px">中文 ↗</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 
   <!-- PROJECT DRAWER -->
   <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
@@ -489,6 +548,7 @@ input::placeholder{color:#9a9183}
       <button onClick="{{ newEntry }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ entry</button>
       <button onClick="{{ newProject }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ project</button>
       <button onClick="{{ newPhoto }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ cat photo</button>
+      <label title="replace all content with a saved content.json" style="background:none;color:#f3eee5;cursor:pointer;padding:9px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid #5f574c">import<input type="file" accept="application/json,.json" onChange="{{ onImport }}" style="display:none"></input></label>
       <button onClick="{{ signOut }}" style="background:none;color:#b8ab92;border:none;cursor:pointer;padding:9px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:underline">sign out</button>
     </div>
   </sc-if>
@@ -568,7 +628,12 @@ class Component extends DCLogic {
       const lim = window.scrollY + window.innerHeight * 0.8;
       for (const c of document.querySelectorAll('svg[data-paw]')) { const on = +c.dataset.y < lim; c.style.opacity = on ? '.42' : '0'; c.style.transform = c.dataset.rot + (on ? ' scale(1)' : ' scale(.4)'); }
     };
-    this.onScroll = () => { if (!this.revealPaws) return; if (!this.sTick) { this.sTick = true; requestAnimationFrame(() => { this.sTick = false; this.revealPaws(); }); } };
+    this.onHash = () => this.setState({ hashNow: location.hash });
+    window.addEventListener('hashchange', this.onHash);
+    this.onScroll = () => {
+      const g = this.projRef.current;
+      if (g) { if (!this.scrolling) { this.scrolling = true; g.style.pointerEvents = 'none'; } clearTimeout(this.scrollT); this.scrollT = setTimeout(() => { this.scrolling = false; g.style.pointerEvents = ''; }, 160); }
+      if (!this.revealPaws) return; if (!this.sTick) { this.sTick = true; requestAnimationFrame(() => { this.sTick = false; this.revealPaws(); }); } };
     window.addEventListener('scroll', this.onScroll, { passive: true });
     this.ro = new ResizeObserver(() => this.layoutPaws());
     if (this.rootRef.current) this.ro.observe(this.rootRef.current);
@@ -596,6 +661,34 @@ class Component extends DCLogic {
     }
   }
   API = 'https://api.bat-cat.net';
+  projRef = React.createRef();
+  RESUMES = [['finance', 'Finance', '金融'], ['data', 'Data', '数据'], ['swe', 'Software engineering', '软件工程']];
+  aboutVals(by) {
+    const m = (this.state.hashNow || location.hash).match(/^#about\/(\w+)$/);
+    const s = m && by[m[1]];
+    if (!s || m[1] !== 'ziv') return { aboutOpen: false, ab: { resumes: [] } };
+    return { aboutOpen: true, closeAbout: () => { history.replaceState(null, '', location.pathname); this.setState({ hashNow: '#' }); },
+      ab: { id: s.id, name: s.name, legal: s.legal, bio: s.bio, color: s.color,
+        resumes: this.RESUMES.map(([k, label, zh]) => ({ label, zh, en: 'resumes/violet-' + k + '-en.pdf', cn: 'resumes/violet-' + k + '-zh.pdf' })) } };
+  }
+  readVals(by, pBy) {
+    const m = (this.state.hashNow || location.hash).match(/^#entry\/(.+)$/);
+    const e = m && this.ENTRIES.find(x => String(x.id) === decodeURIComponent(m[1]));
+    if (!e) return { reading: false, rd: { images: [] } };
+    const s = by[e.who] || { color: '#1c1916', name: e.who || '' };
+    const [y, mo, d] = e.d.split('-');
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    if (document.title !== e.title + ' · batcat') document.title = e.title + ' · batcat';
+    return { reading: true, rd: { title: e.title, body: e.body || e.excerpt, color: s.color, who: e.who, sign: (s.name || '').toLowerCase(),
+      date: (+d) + ' ' + months[+mo - 1] + ' ' + y, project: pBy[e.proj] ? pBy[e.proj].title : '', images: (e.images || []).map(src => ({ src })) } };
+  }
+  async importFile(ev) {
+    const file = ev.target.files && ev.target.files[0]; ev.target.value = '';
+    if (!file) return;
+    let d; try { d = JSON.parse(await file.text()); if (!Array.isArray(d.journal)) throw 0; } catch { return window.alert("That file doesn't look like a batcat content.json."); }
+    if (!window.confirm('Replace everything on the site with this file?')) return;
+    try { await this.putContent(d); window.alert('Imported.'); } catch (err) { window.alert(err.message); }
+  }
   raw() {
     if (this.content) return JSON.parse(JSON.stringify(this.content));
     return { siblings: this.SIBS.map(({ id, name, legal, color, bio, now }) => ({ id, name, legal, color, bio, now })),
@@ -711,7 +804,7 @@ class Component extends DCLogic {
     const by = Object.fromEntries(this.SIBS.map(s => [s.id, s]));
     const pBy = Object.fromEntries(this.PROJECTS.map(p => [p.id, p]));
     const night = st.pinned != null ? st.pinned : (st.hover || !!P.startAtNight);
-    const pColor = p => p.owners.length > 1 || !by[p.owners[0]] ? '#1c1916' : by[p.owners[0]].color;
+    const pColor = p => p.owners.length > 1 || !by[p.owners[0]] ? 'var(--ink,#1c1916)' : 'var(--c-' + p.owners[0] + ',' + by[p.owners[0]].color + ')';
     const pOwners = p => p.owners.length > 1 ? 'zii + ziv + ziu' : p.owners[0];
     const setSib = id => this.setState({ sib: sib === id ? 'all' : id });
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -724,9 +817,10 @@ class Component extends DCLogic {
       let g = groups.find(g => g.label === label); if (!g) groups.push(g = { label, items: [] });
       const open = !!st.open[e.id], s = by[e.who] || { color: '#1c1916', name: e.who || '' };
       const imgs = e.images || [];
-      g.items.push({ ...e, day: +d, color: s.color, who: e.who, project: pBy[e.proj] ? pBy[e.proj].title : '', images: imgs.map(src => ({ src })), hasImages: open && imgs.length > 0, sign: s.name.toLowerCase(),
+      g.items.push({ ...e, day: +d, color: by[e.who] ? 'var(--c-' + e.who + ',' + s.color + ')' : 'var(--ink,#1c1916)', who: e.who, project: pBy[e.proj] ? pBy[e.proj].title : '', images: imgs.map(src => ({ src })), hasImages: open && imgs.length > 0, sign: s.name.toLowerCase(),
         read: Math.max(1, Math.round((e.body.length + e.excerpt.length) / 160)) + ' min', open, cta: open ? 'close' : 'read entry',
         toggle: () => this.setState(s2 => ({ open: { ...s2.open, [e.id]: !s2.open[e.id] } })),
+        href: '#entry/' + encodeURIComponent(e.id), stop: ev => ev.stopPropagation(),
         edit: ev => { ev && ev.stopPropagation(); this.openEd('journal', e.id); } });
     });
     const projs = this.PROJECTS.filter(p => all || p.owners.includes(sib));
@@ -750,8 +844,10 @@ class Component extends DCLogic {
       goProjects: e => { e.preventDefault(); this.go('projects'); },
       goJournals: e => { e.preventDefault(); this.go('journals'); },
       goCat: e => { e.preventDefault(); this.go('cat'); },
-      switcher: [{ id: 'all', label: 'all', color: '#1c1916' }, ...this.SIBS.map(s => ({ id: s.id, label: s.id, color: s.color }))].map(w => ({
-        ...w, bg: sib === w.id ? '#1c1916' : 'transparent', fg: sib === w.id ? '#f3eee5' : '#5f574c', select: () => this.setState({ sib: w.id }) })),
+      switcher: [{ id: 'all', label: 'all', color: 'var(--ink,#1c1916)' }, ...this.SIBS.map(s => ({ id: s.id, label: s.id, color: 'var(--c-' + s.id + ',' + s.color + ')' }))].map(w => ({
+        ...w, bg: sib === w.id ? 'var(--ink,#1c1916)' : 'transparent', fg: sib === w.id ? 'var(--paper,#f3eee5)' : 'var(--mute,#5f574c)', select: () => this.setState({ sib: w.id }) })),
+      themeVars: night ? '--hdr:rgba(20,17,13,.94);--paper:#14110d;--ink:#efe7d8;--rule:#3a3329;--mute:#b8ab92;--mute3:#8d8577;--mute2:#a59c8d;--body:#cfc5b4;--body2:#e6dfd2;--card:#221d17;--ph1:#2a241d;--ph2:#302921;--c-zii:oklch(0.78 0.11 65);--c-ziv:oklch(0.78 0.11 290);--c-ziu:oklch(0.78 0.11 340);' : '',
+      hdrBlend: night ? 'screen' : 'multiply', hdrFilter: night ? 'invert(1)' : 'none',
       nightR: night ? '160%' : '0%', nightX: st.ox, nightY: st.oy,
       heroInk: night ? '#f3eee5' : '#1c1916', heroMuted: night ? '#b8ab92' : '#5f574c', heroAccent: night ? '#e6c47a' : '#1c1916',
       heroHint: st.pinned === true ? 'night. click him again for daylight.' : st.pinned === false ? 'daylight. click him for night.' : night ? 'lights out. click to keep it dark.' : 'hover over the cat — he likes the dark.',
@@ -763,7 +859,7 @@ class Component extends DCLogic {
       logoEnter: ev => this.setState({ hover: true, ...this.origin(ev) }),
       logoLeave: () => this.setState({ hover: false }),
       logoClick: ev => { const o = this.origin(ev); this.setState({ pinned: !night, ...o }); },
-      siblings: this.SIBS.map(s => ({ ...s, handle: s.id, dim: all || sib === s.id ? 1 : 0.4,
+      siblings: this.SIBS.map(s => ({ ...s, hasAbout: s.id === 'ziv', aboutHref: '#about/' + s.id, color: 'var(--c-' + s.id + ',' + s.color + ')', handle: s.id, dim: all || sib === s.id ? 1 : 0.4,
         cta: sib === s.id ? 'show everyone' : 'only ' + s.name + "'s work →",
         select: () => { setSib(s.id); if (sib !== s.id) setTimeout(() => this.go('projects'), 50); } })),
       projLabel: (all ? 'everyone' : by[sib].name) + ' · ' + projs.length + ' projects',
@@ -790,6 +886,8 @@ class Component extends DCLogic {
       edHasImg: !!st.ed && !!st.ed.f.img, edImgCta: st.ed && st.ed.f.img ? 'replace cover image' : '+ cover image',
       edHasSrc: !!st.ed && !!st.ed.f.src, edSrcCta: st.ed && st.ed.f.src ? 'replace photo' : '+ choose photo',
       edMsg: st.edMsg || '', edMsgColor: st.edErr ? '#a33a2e' : '#5f574c',
+      ...this.readVals(by, pBy), ...this.aboutVals(by),
+      projRef: this.projRef, onImport: e => this.importFile(e),
       saveEd: () => this.saveEd(), deleteEd: () => this.deleteEd(), saveCta: 'save',
       gameOpen: !!st.game, gameUrl: st.game ? st.game.url : '', gameTitle: st.game ? st.game.title : '', closeGame: () => this.setState({ game: null }),
       cur: dp ? { ...dp, edit: () => this.openEd('project', dp.id), openGame: () => this.setState({ game: { url: new URL(dp.play, document.baseURI).href, title: dp.title } }), hasImg: !!dp.img, noImg: !dp.img, hasPlay: !!dp.play, hasCode: !!dp.code, color: pColor(dp), owners: pOwners(dp), logCount: dLogs.length, hasLogs: dLogs.length > 0,

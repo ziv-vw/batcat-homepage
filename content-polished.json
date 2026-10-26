@@ -1,0 +1,169 @@
+{
+  "siblings": [
+    {
+      "id": "zii",
+      "name": "Ziyi",
+      "legal": "Ziyi Wang",
+      "color": "oklch(0.52 0.11 65)",
+      "bio": "Studied mathematics and now works on AI research, with a focus on teaching robots to learn and act. His projects span research, engineering, and experiments that bring the two together.",
+      "now": "teaching Rover-01 to avoid the rug"
+    },
+    {
+      "id": "ziv",
+      "name": "Violet",
+      "legal": "Ziwei Wang",
+      "color": "oklch(0.52 0.11 290)",
+      "bio": "Studied business and computer science, and likes building little software projects and exploring ideas along the way.",
+      "now": "writing the about page"
+    },
+    {
+      "id": "ziu",
+      "name": "Lavender",
+      "legal": "Zijuan Wang",
+      "color": "oklch(0.52 0.11 340)",
+      "bio": "Studies life sciences and spends her spare time knitting. This is where her patterns, works in progress, and finished pieces live.",
+      "now": "on the second sleeve"
+    }
+  ],
+  "projects": [
+    {
+      "id": "cardigan",
+      "title": "Flower Handbag",
+      "owners": [
+        "ziu"
+      ],
+      "status": "finished",
+      "year": 2026,
+      "ratio": "4/3",
+      "note": "flowers, one stitch at a time",
+      "blurb": "A knitted handbag covered in a flower pattern, made from start to finish by hand.",
+      "img": "https://api.bat-cat.net/photo/mvozhswor6meo.jpg",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "hat",
+      "title": "A Guide to Obesity",
+      "owners": [
+        "ziu"
+      ],
+      "status": "finished",
+      "year": 2025,
+      "ratio": "16/10",
+      "note": "made for a life sciences course",
+      "blurb": "A small website that explains obesity: what causes it, how it affects the body, and what the research says about preventing and treating it.",
+      "img": "https://api.bat-cat.net/photo/mvozdl3xjqw29.jpg",
+      "play": "https://lifesci3aa3.bat-cat.net/",
+      "code": ""
+    },
+    {
+      "id": "catchess",
+      "title": "Cat Chess",
+      "owners": [
+        "ziv"
+      ],
+      "status": "playable",
+      "year": 2026,
+      "ratio": "1/1",
+      "note": "tuxedos vs. ragdolls",
+      "blurb": "Chess with cat pieces, pass-and-play or against a simple computer. The rules run on a C++ chess engine compiled to WebAssembly.",
+      "img": "assets/proj-catchess.png",
+      "play": "https://chess.bat-cat.net",
+      "code": "https://github.com/ziv-vw/cat-chess"
+    },
+    {
+      "id": "p24",
+      "title": "24 Points",
+      "owners": [
+        "ziv"
+      ],
+      "status": "playable",
+      "year": 2026,
+      "ratio": "4/3",
+      "note": "8 ÷ (3 − 8 ÷ 3)",
+      "blurb": "The 24-point card game: combine four cards with + − × ÷ to make 24. The solver is written in C and compiled to WebAssembly, and there is a terminal version too.",
+      "img": "assets/proj-24.png",
+      "play": "https://24.bat-cat.net",
+      "code": "https://github.com/ziv-vw/twentyfour"
+    }
+  ],
+  "journal": [
+    {
+      "id": "jmvozocki",
+      "title": "A new start",
+      "date": "2026-10-26",
+      "who": "ziv",
+      "project": "",
+      "excerpt": "I spent most of a day cleaning up two old projects, giving them proper visuals, and building a homepage for bat-cat.net.",
+      "body": "I spent most of a day cleaning up two old projects, one from high school and one from university, and building this homepage for bat-cat.net.\n\nBoth projects used to be code and nothing else. You had to read the source to understand what they did. Giving them a real interface changed that: the chess engine now has a board with cat pieces you can actually play on, and the 24-point solver became a card game in the browser. Seeing them on screen made them feel like finished things for the first time.\n\nThe homepage was the bigger job. I wanted one place where the three of us could keep our projects and the notes we write along the way, with Tangyuan and Niangao somewhere on the page too. Now it exists, and it's live.\n\nIt's a goal I've had for a long time, and today I finally got it done.",
+      "images": []
+    },
+    {
+      "id": "jziu-bag",
+      "title": "The flower handbag is finished",
+      "date": "2026-10-25",
+      "who": "ziu",
+      "project": "cardigan",
+      "excerpt": "My knitted flower handbag is done. Here are the photos.",
+      "body": "My knitted flower handbag is finished.\n\nNotes on the pattern, yarn and what I'd do differently next time will go here.",
+      "images": []
+    },
+    {
+      "id": "jziu-obesity",
+      "title": "Putting the obesity guide online",
+      "date": "2025-12-01",
+      "who": "ziu",
+      "project": "hat",
+      "excerpt": "For my life sciences course, I made a small website about obesity instead of a written report.",
+      "body": "For my life sciences course, I made a small website about obesity instead of a written report. It covers what causes obesity, how it affects the body, and what the research says about preventing and treating it.\n\nIt's online at lifesci3aa3.bat-cat.net.",
+      "images": []
+    }
+  ],
+  "gallery": [
+    {
+      "cat": "tangyuan",
+      "caption": "on the fluffy bed",
+      "src": "assets/gallery/g01.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "chair nap",
+      "src": "assets/gallery/g02.jpg"
+    },
+    {
+      "cat": "tangyuan",
+      "caption": "guarding the box",
+      "src": "assets/gallery/g03.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "umbrella shelter",
+      "src": "assets/gallery/g04.jpg"
+    },
+    {
+      "cat": "tangyuan",
+      "caption": "full moon mode",
+      "src": "assets/gallery/g05.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "a little too close",
+      "src": "assets/gallery/g06.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "two beds, two loaves",
+      "src": "assets/gallery/g07.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "nap shift",
+      "src": "assets/gallery/g08.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "holding paws",
+      "src": "assets/gallery/g09.jpg"
+    }
+  ]
+}

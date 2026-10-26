@@ -27,95 +27,33 @@
   ],
   "projects": [
     {
-      "id": "feeder",
-      "title": "Night Feeder",
-      "owners": [
-        "zii",
-        "ziv",
-        "ziu"
-      ],
-      "status": "in progress",
-      "year": 2026,
-      "ratio": "4/3",
-      "note": "he is winning",
-      "blurb": "Our one joint project: a timed feeder so Tangyuan can eat at 3am without waking anyone up.",
-      "img": "",
-      "play": "",
-      "code": ""
-    },
-    {
-      "id": "rover",
-      "title": "Rover-01",
-      "owners": [
-        "zii"
-      ],
-      "status": "in progress",
-      "year": 2026,
-      "ratio": "1/1",
-      "note": "wheels v3",
-      "blurb": "A palm-sized rover that maps the house at night and reports where both cats are sleeping.",
-      "img": "",
-      "play": "",
-      "code": ""
-    },
-    {
       "id": "cardigan",
-      "title": "Cable Cardigan",
+      "title": "Flower Handbag",
       "owners": [
         "ziu"
-      ],
-      "status": "in progress",
-      "year": 2026,
-      "ratio": "3/4",
-      "note": "one sleeve to go",
-      "blurb": "A cream wool cardigan with cables up the front, knit from her own adapted pattern.",
-      "img": "",
-      "play": "",
-      "code": ""
-    },
-    {
-      "id": "socks",
-      "title": "Sock Drawer",
-      "owners": [
-        "ziu"
-      ],
-      "status": "in progress",
-      "year": 2026,
-      "ratio": "1/1",
-      "note": "7 pairs",
-      "blurb": "One pair of socks a month, each testing a new heel or yarn.",
-      "img": "",
-      "play": "",
-      "code": ""
-    },
-    {
-      "id": "weather",
-      "title": "Pixel Weather",
-      "owners": [
-        "zii"
       ],
       "status": "finished",
-      "year": 2025,
-      "ratio": "4/5",
-      "note": "still running",
-      "blurb": "An e-ink weather station on the windowsill that redraws the sky every hour.",
-      "img": "",
+      "year": 2026,
+      "ratio": "4/3",
+      "note": "flowers, one stitch at a time",
+      "blurb": "A knitted handbag covered in a flower pattern, made from start to finish by hand.",
+      "img": "https://api.bat-cat.net/photo/mvozhswor6meo.jpg",
       "play": "",
       "code": ""
     },
     {
       "id": "hat",
-      "title": "Colorwork Hat Pattern",
+      "title": "A Guide to Obesity",
       "owners": [
         "ziu"
       ],
       "status": "finished",
       "year": 2025,
-      "ratio": "4/5",
-      "note": "pattern written up",
-      "blurb": "A two-color hat with a cat-ear motif around the brim. The chart and notes are in the journal.",
-      "img": "",
-      "play": "",
+      "ratio": "16/10",
+      "note": "made for a life sciences course",
+      "blurb": "A small website that explains obesity: what causes it, how it affects the body, and what the research says about preventing and treating it.",
+      "img": "https://api.bat-cat.net/photo/mvozdl3xjqw29.jpg",
+      "play": "https://lifesci3aa3.bat-cat.net/",
       "code": ""
     },
     {
@@ -147,112 +85,37 @@
       "img": "assets/proj-24.png",
       "play": "https://24.bat-cat.net",
       "code": "https://github.com/ziv-vw/twentyfour"
-    },
-    {
-      "id": "chess",
-      "title": "Tiny Chess Engine",
-      "owners": [
-        "zii"
-      ],
-      "status": "paused",
-      "year": 2025,
-      "ratio": "1/1",
-      "note": "beats dad",
-      "blurb": "A small chess engine written from scratch. It beats our dad and loses to everyone else.",
-      "img": "",
-      "play": "",
-      "code": ""
     }
   ],
   "journal": [
     {
-      "id": 1,
+      "id": "jmvozocki",
+      "title": "A new start",
+      "date": "2026-10-26",
       "who": "ziv",
-      "project": "feeder",
-      "date": "2026-10-21",
-      "title": "She figured out the lid in a day",
-      "excerpt": "We spent two weekends on the latch. He opened it before breakfast.",
-      "body": "The first prototype used a magnet latch. By morning it was open and the bowl was empty. Niangao watched him do it and took notes. zii wants a servo lock; ziu thinks we should just feed him at 3am ourselves. Back to the drawing board, with a lot more respect for the users.",
+      "project": "",
+      "excerpt": "I spent most of a day cleaning up two old projects, giving them proper visuals, and building a homepage for bat-cat.net.",
+      "body": "I spent most of a day cleaning up two old projects, one from high school and one from university, and building this homepage for bat-cat.net.\n\nBoth projects used to be code and nothing else. You had to read the source to understand what they did. Giving them a real interface changed that: the chess engine now has a board with cat pieces you can actually play on, and the 24-point solver became a card game in the browser. Seeing them on screen made them feel like finished things for the first time.\n\nThe homepage was the bigger job. I wanted one place where the three of us could keep our projects and the notes we write along the way, with Tangyuan and Niangao somewhere on the page too. Now it exists, and it's live.\n\nIt's a goal I've had for a long time, and today I finally got it done.",
       "images": []
     },
     {
-      "id": 2,
-      "who": "zii",
-      "project": "rover",
-      "date": "2026-10-17",
-      "title": "First map of the hallway",
-      "excerpt": "Lidar works, wheels slip on the rug.",
-      "body": "The map looks like a cat drew it, which feels appropriate. It also found Niangao asleep under the radiator, twice. Next: rubber treads, and slowing down before the rug instead of after.",
-      "images": []
-    },
-    {
-      "id": 3,
+      "id": "jziu-bag",
+      "title": "The flower handbag is finished",
+      "date": "2026-10-25",
       "who": "ziu",
       "project": "cardigan",
-      "date": "2026-10-12",
-      "title": "Cable chart, revised",
-      "excerpt": "Moved the cables two stitches in so they sit flat.",
-      "body": "The first chart pulled the front edges inward. Revised it so the cables start two stitches from the button band, and swapped to a smaller needle for the ribbing. Chart and swatch photos below.",
+      "excerpt": "My knitted flower handbag is done. Here are the photos.",
+      "body": "My knitted flower handbag is finished.\n\nNotes on the pattern, yarn and what I'd do differently next time will go here.",
       "images": []
     },
     {
-      "id": 9,
+      "id": "jziu-obesity",
+      "title": "Putting the obesity guide online",
+      "date": "2025-12-01",
       "who": "ziu",
-      "project": "cardigan",
-      "date": "2026-10-08",
-      "title": "Niangao found the yarn basket",
-      "excerpt": "Two skeins, one fluffy paperweight.",
-      "body": "Left the basket open for ten minutes. Came back to Niangao curled on the cream wool, very pleased. The yarn survived, with extra fur. The basket now has a lid.",
-      "images": []
-    },
-    {
-      "id": 10,
-      "who": "ziv",
-      "project": "catchess",
-      "date": "2026-10-04",
-      "title": "Checking the engine with perft",
-      "excerpt": "perft(5) = 4,865,609. All five depths match.",
-      "body": "Counting legal move sequences from the start position against known totals is how I know castling, en passant, promotion and check are right. The computer is still one ply: take a mate, grab the best capture, otherwise a little random. Minimax is next.",
-      "images": []
-    },
-    {
-      "id": 5,
-      "who": "ziu",
-      "project": "socks",
-      "date": "2026-09-28",
-      "title": "Trying a fleegle heel",
-      "excerpt": "No picked-up stitches, no gaps.",
-      "body": "Pair seven uses a fleegle heel instead of a heel flap. Faster, and it fits better over the instep. Writing it into the template for next month.",
-      "images": []
-    },
-    {
-      "id": 6,
-      "who": "zii",
-      "project": "weather",
-      "date": "2026-09-20",
-      "title": "One year on the windowsill",
-      "excerpt": "Three battery swaps, zero missed updates.",
-      "body": "The case has faded in the sun and one corner is chewed (not by me). Writing up what I would change for v2: bigger panel, USB-C, cat-proof stand.",
-      "images": []
-    },
-    {
-      "id": 7,
-      "who": "ziv",
-      "project": "p24",
-      "date": "2026-09-09",
-      "title": "Making 24",
-      "excerpt": "Started with a solver, then built the game around it.",
-      "body": "The C solver tries every ordering of the four cards, every operator triple and all five ways to bracket them, and returns the answer packed into one integer. The page unpacks it for hints and \"show solution\", and only deals hands that can make 24.",
-      "images": []
-    },
-    {
-      "id": 8,
-      "who": "ziu",
-      "project": "feeder",
-      "date": "2026-09-02",
-      "title": "Sketches for a cat-proof lid",
-      "excerpt": "Three ideas, all of them probably wrong.",
-      "body": "A sliding door, a twist lock and a puzzle box. Tangyuan watched the whole time, which I think counts as user research.",
+      "project": "hat",
+      "excerpt": "For my life sciences course, I made a small website about obesity instead of a written report.",
+      "body": "For my life sciences course, I made a small website about obesity instead of a written report. It covers what causes obesity, how it affects the body, and what the research says about preventing and treating it.\n\nIt's online at lifesci3aa3.bat-cat.net.",
       "images": []
     }
   ],
