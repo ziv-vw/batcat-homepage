@@ -19,7 +19,11 @@ The homepage for zii, ziv & ziu — projects, journals, and Tangyuan & Niangao.
 4. **Editor** — go to app.pagescms.org, sign in with GitHub, open `batcat-site`. You'll see forms for Journal entries, Projects, Cat gallery and About us.
    To let zii and ziu post too, add them as collaborators on the GitHub repo (Settings → Collaborators).
 
-## Day to day
+## Editing on the site itself
+
+Once the batcat API Worker is set up (see the separate batcat-api guide), click **edit** in the footer on bat-cat.net, sign in, and add entries, projects and cat photos right on the page. That's the easiest way, and it works on your phone.
+
+## Day to day (editing through GitHub / Pages CMS)
 
 - **New journal entry**: Pages CMS → Site content → Journal entries → *Add* → fill in → *Save*. It's live in about a minute.
   The *Project id* must match a project's id (e.g. `cardigan`, `catchess`, `p24`).

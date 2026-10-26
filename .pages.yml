@@ -1,0 +1,74 @@
+media:
+  input: assets/uploads
+  output: assets/uploads
+
+content:
+  - name: site
+    label: Site content
+    type: file
+    path: content.json
+    format: json
+    fields:
+      - name: journal
+        label: Journal entries
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date }
+          - name: who
+            label: Written by
+            type: select
+            options: { values: [zii, ziv, ziu] }
+          - { name: project, label: Project id (e.g. cardigan), type: string }
+          - { name: excerpt, label: Short summary, type: string }
+          - { name: body, label: Full entry, type: text }
+          - { name: images, label: Photos, type: image, list: true }
+          - { name: id, label: Id (any unique word), type: string }
+      - name: projects
+        label: Projects
+        type: object
+        list: true
+        fields:
+          - { name: id, label: Id (short, no spaces), type: string }
+          - { name: title, label: Title, type: string }
+          - name: owners
+            label: Made by
+            type: select
+            options: { multiple: true, values: [zii, ziv, ziu] }
+          - name: status
+            label: Status
+            type: select
+            options: { values: [in progress, finished, paused, playable] }
+          - { name: year, label: Year, type: number }
+          - { name: blurb, label: Description, type: text }
+          - { name: note, label: Handwritten note, type: string }
+          - { name: img, label: Cover image, type: image }
+          - name: ratio
+            label: Image shape
+            type: select
+            options: { values: [1/1, 4/3, 3/4, 4/5, 16/10, 16/9] }
+          - { name: play, label: Link to play/demo (optional), type: string }
+          - { name: code, label: Link to code (optional), type: string }
+      - name: gallery
+        label: Cat gallery
+        type: object
+        list: true
+        fields:
+          - { name: src, label: Photo, type: image }
+          - { name: caption, label: Caption, type: string }
+          - name: cat
+            label: Who
+            type: select
+            options: { values: [tangyuan, niangao, both] }
+      - name: siblings
+        label: About us
+        type: object
+        list: true
+        fields:
+          - { name: id, label: Handle, type: string }
+          - { name: name, label: Name, type: string }
+          - { name: legal, label: Full name, type: string }
+          - { name: bio, label: Bio, type: text }
+          - { name: now, label: Now working on, type: string }
+          - { name: color, label: Color, type: string }

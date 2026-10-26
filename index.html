@@ -172,7 +172,12 @@ input::placeholder{color:#9a9183}
                     </sc-if>
                     <span style="font-family:Caveat,cursive;font-size:24px;color:{{ e.color }}">— {{ e.sign }}</span>
                   </sc-if>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916;text-decoration:underline;text-underline-offset:3px">{{ e.cta }}</span>
+                  <div style="display:flex;gap:16px;align-items:center">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916;text-decoration:underline;text-underline-offset:3px">{{ e.cta }}</span>
+                    <sc-if value="{{ admin }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ e.edit }}" style="background:#e6c47a;border:none;cursor:pointer;padding:3px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916">edit</button>
+                    </sc-if>
+                  </div>
                 </div>
               </div>
             </sc-for>
@@ -256,7 +261,12 @@ input::placeholder{color:#9a9183}
               <div style="aspect-ratio:3/2;position:relative"><image-slot id="{{ ph.slot }}" shape="rect" placeholder="{{ ph.who }}" src="{{ ph.src }}"></image-slot></div>
               <span style="position:absolute;right:8px;bottom:-1px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#d9b56a;letter-spacing:.08em">{{ ph.frame }}</span>
             </div>
-            <span style="font-family:Caveat,cursive;font-size:22px;line-height:1.1;color:#e6dfd2;padding:0 8px">{{ ph.caption }}</span>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 8px">
+              <span style="font-family:Caveat,cursive;font-size:22px;line-height:1.1;color:#e6dfd2">{{ ph.caption }}</span>
+              <sc-if value="{{ admin }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ ph.edit }}" style="background:#e6c47a;border:none;cursor:pointer;padding:3px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916">edit</button>
+              </sc-if>
+            </div>
           </div>
         </sc-for>
       </div>
@@ -304,7 +314,7 @@ input::placeholder{color:#9a9183}
   </div>
 
   <footer style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px clamp(18px,4vw,56px) 36px;background:#1c1916;color:#8d8577;border-top:1px solid #2e2a25;font-family:'IBM Plex Mono',monospace;font-size:11px">
-    <span>batcat · zii, ziv &amp; ziu wang</span>
+    <span style="display:flex;gap:14px;align-items:center">batcat · zii, ziv &amp; ziu wang <button onClick="{{ openLogin }}" style="background:none;border:none;cursor:pointer;padding:0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5f574c;text-decoration:underline">edit</button></span>
     <span style="display:flex;align-items:center;gap:8px">supervised by
       <img src="assets/tangyuan-logo.png" alt="" style="width:24px;height:24px"></img>
       <img src="assets/niangao-logo.png" alt="" style="width:24px;height:24px"></img>
@@ -328,6 +338,9 @@ input::placeholder{color:#9a9183}
         <div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#e6dfd2 0 8px,#ede7dc 8px 16px);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8577">project photos</div>
       </sc-if>
       <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <sc-if value="{{ admin }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ cur.edit }}" style="background:#e6c47a;border:none;cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">edit project</button>
+        </sc-if>
         <sc-if value="{{ cur.hasPlay }}" hint-placeholder-val="{{ false }}">
           <button onClick="{{ cur.openGame }}" style="background:#1c1916;color:#f3eee5;border:none;cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px">play it →</button>
         </sc-if>
@@ -363,6 +376,120 @@ input::placeholder{color:#9a9183}
         </div>
         <iframe src="{{ gameUrl }}" title="{{ gameTitle }}" style="flex:1;width:100%;border:none;background:#fff"></iframe>
       </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ loginOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:70;background:rgba(28,25,22,.6);display:flex;align-items:center;justify-content:center;padding:16px">
+      <form onSubmit="{{ doLogin }}" style="width:min(380px,100%);background:#f3eee5;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 80px rgba(0,0,0,.4)">
+        <span style="font-family:'Libre Caslon Display',serif;font-size:32px;line-height:1">Edit the notebook</span>
+        <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">password
+          <input type="password" name="pw" value="{{ pwInput }}" onChange="{{ onPw }}" autoComplete="current-password" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input>
+        </label>
+        <span style="font-family:Caveat,cursive;font-size:22px;color:#a33a2e">{{ loginErr }}</span>
+        <div style="display:flex;gap:18px;align-items:center">
+          <button type="submit" style="background:#1c1916;color:#f3eee5;border:none;cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ loginCta }}</button>
+          <button type="button" onClick="{{ closeLogin }}" style="background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">cancel</button>
+        </div>
+      </form>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ edOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:70;background:rgba(28,25,22,.6);display:flex;justify-content:flex-end">
+      <div style="width:min(560px,100vw);height:100%;overflow-y:auto;background:#f3eee5;padding:24px clamp(18px,4vw,36px) 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <span style="font-family:'Libre Caslon Display',serif;font-size:32px;line-height:1">{{ edTitle }}</span>
+          <button onClick="{{ closeEd }}" style="background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">close</button>
+        </div>
+
+        <sc-if value="{{ edJournal }}" hint-placeholder-val="{{ false }}">
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">title<input name="title" value="{{ ed.title }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">date<input type="date" name="date" value="{{ ed.date }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">written by
+              <select name="who" value="{{ ed.who }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"><option value="zii">zii</option><option value="ziv">ziv</option><option value="ziu">ziu</option></select>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">project
+              <select name="project" value="{{ ed.project }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0">
+                <option value="">—</option>
+                <sc-for list="{{ projOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.title }}</option></sc-for>
+              </select>
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">short summary<input name="excerpt" value="{{ ed.excerpt }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">full entry<textarea name="body" value="{{ ed.body }}" onChange="{{ onField }}" rows="9" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0;resize:vertical;line-height:1.55"></textarea></label>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">photos</span>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px">
+              <sc-for list="{{ edImgs }}" as="im" hint-placeholder-count="0">
+                <div style="position:relative;aspect-ratio:1">
+                  <img src="{{ im.src }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></img>
+                  <button onClick="{{ im.remove }}" title="remove" style="position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:none;background:#1c1916;color:#f3eee5;cursor:pointer;font-size:13px">×</button>
+                </div>
+              </sc-for>
+            </div>
+            <label style="align-self:flex-start;cursor:pointer;border:1px dashed #1c1916;padding:12px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ add photos<input type="file" accept="image/*" multiple="multiple" onChange="{{ onFiles }}" style="display:none"></input></label>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ edProject }}" hint-placeholder-val="{{ false }}">
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">title<input name="title" value="{{ ed.title }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">made by</span>
+            <div style="display:flex;gap:6px">
+              <sc-for list="{{ edOwners }}" as="ow" hint-placeholder-count="3">
+                <button onClick="{{ ow.toggle }}" style="border:1px solid #1c1916;background:{{ ow.bg }};color:{{ ow.fg }};padding:6px 12px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ ow.id }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">status
+              <select name="status" value="{{ ed.status }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"><option value="in progress">in progress</option><option value="finished">finished</option><option value="paused">paused</option><option value="playable">playable</option></select>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">year<input type="number" name="year" value="{{ ed.year }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+            <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">image shape
+              <select name="ratio" value="{{ ed.ratio }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"><option value="1/1">square</option><option value="4/3">landscape</option><option value="16/10">wide</option><option value="3/4">portrait</option><option value="4/5">tall</option></select>
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">description<textarea name="blurb" value="{{ ed.blurb }}" onChange="{{ onField }}" rows="4" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0;resize:vertical;line-height:1.55"></textarea></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">handwritten note<input name="note" value="{{ ed.note }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+            <sc-if value="{{ edHasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ ed.img }}" alt="" style="width:96px;height:96px;object-fit:cover;display:block"></img></sc-if>
+            <label style="cursor:pointer;border:1px dashed #1c1916;padding:12px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ edImgCta }}<input type="file" accept="image/*" onChange="{{ onFiles }}" style="display:none"></input></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">link to play (optional)<input name="play" value="{{ ed.play }}" onChange="{{ onField }}" placeholder="https://" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">link to code (optional)<input name="code" value="{{ ed.code }}" onChange="{{ onField }}" placeholder="https://github.com/…" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+        </sc-if>
+
+        <sc-if value="{{ edPhoto }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+            <sc-if value="{{ edHasSrc }}" hint-placeholder-val="{{ false }}"><img src="{{ ed.src }}" alt="" style="width:140px;height:140px;object-fit:cover;display:block"></img></sc-if>
+            <label style="cursor:pointer;border:1px dashed #1c1916;padding:12px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ edSrcCta }}<input type="file" accept="image/*" onChange="{{ onFiles }}" style="display:none"></input></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">caption<input name="caption" value="{{ ed.caption }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"></input></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">who
+            <select name="cat" value="{{ ed.cat }}" onChange="{{ onField }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:8px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;width:100%;box-sizing:border-box;border-radius:0"><option value="tangyuan">tangyuan</option><option value="niangao">niangao</option><option value="both">both</option></select>
+          </label>
+        </sc-if>
+
+        <span style="font-family:Caveat,cursive;font-size:24px;color:{{ edMsgColor }}">{{ edMsg }}</span>
+        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:4px">
+          <button onClick="{{ saveEd }}" style="background:#1c1916;color:#f3eee5;border:none;cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ saveCta }}</button>
+          <sc-if value="{{ edCanDelete }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ deleteEd }}" style="background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916;color:#a33a2e;border-color:#a33a2e">delete</button>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ admin }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;background:#1c1916;color:#f3eee5;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100vw - 24px);box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:12px">
+      <span style="color:#e6c47a;padding:0 8px">editing</span>
+      <button onClick="{{ newEntry }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ entry</button>
+      <button onClick="{{ newProject }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ project</button>
+      <button onClick="{{ newPhoto }}" style="background:#f3eee5;color:#1c1916;border:none;cursor:pointer;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px">+ cat photo</button>
+      <button onClick="{{ signOut }}" style="background:none;color:#b8ab92;border:none;cursor:pointer;padding:9px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:underline">sign out</button>
     </div>
   </sc-if>
   {{ pawLayer }}
@@ -420,7 +547,7 @@ class Component extends DCLogic {
       this.raf = requestAnimationFrame(tick);
     };
     this.raf = requestAnimationFrame(tick);
-    this.onKey = e => { if (e.key === 'Escape') this.setState(this.state.game ? { game: null } : { drawer: null }); };
+    this.onKey = e => { if (e.key === 'Escape') this.setState(this.state.ed ? { ed: null } : this.state.loginOpen ? { loginOpen: false } : this.state.game ? { game: null } : { drawer: null }); };
     window.addEventListener('keydown', this.onKey);
     this.onResize = () => { const w = window.innerWidth >= 900; if (w !== this.state.wide) this.setState({ wide: w }); };
     window.addEventListener('resize', this.onResize); this.onResize();
@@ -446,8 +573,18 @@ class Component extends DCLogic {
     this.ro = new ResizeObserver(() => this.layoutPaws());
     if (this.rootRef.current) this.ro.observe(this.rootRef.current);
     this.layoutPaws();
-    fetch('content.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+    const pw = sessionStorage.getItem('bc-admin');
+    if (pw) this.setState({ admin: true });
+    if (location.hash === '#admin' && !pw) this.setState({ loginOpen: true });
+    fetch(this.API + '/content', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null)
+      .then(d => d || fetch('content.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null))
+      .then(d => this.apply(d));
+  }
+  apply(d) {
+    {
       if (!d) return;
+      (d.journal || []).forEach((e, i) => { if (e.id == null || e.id === '') e.id = 'j' + i; });
+      this.content = d;
       const rots = ['-1deg', '1.2deg', '-0.6deg', '0.8deg', '1.6deg', '-1.4deg', '0.5deg', '-0.9deg', '1deg'];
       const srot = ['-2deg', '-1deg', '1.5deg'];
       if (d.siblings) this.SIBS = d.siblings.map((s, i) => ({ rot: srot[i % 3], ...s }));
@@ -456,7 +593,108 @@ class Component extends DCLogic {
         .filter(e => e.d).sort((a, b) => b.d.localeCompare(a.d));
       if (d.gallery) this.PHOTOS = d.gallery;
       this.pawDims = null; this.forceUpdate(() => setTimeout(() => this.layoutPaws(), 300));
-    }).catch(() => {});
+    }
+  }
+  API = 'https://api.bat-cat.net';
+  raw() {
+    if (this.content) return JSON.parse(JSON.stringify(this.content));
+    return { siblings: this.SIBS.map(({ id, name, legal, color, bio, now }) => ({ id, name, legal, color, bio, now })),
+      projects: this.PROJECTS.map(({ rot, ...p }) => p),
+      journal: this.ENTRIES.map(e => ({ id: e.id, who: e.who, project: e.proj, date: e.d, title: e.title, excerpt: e.excerpt, body: e.body, images: e.images || [] })),
+      gallery: this.PHOTOS.map(({ cat, caption, src }) => ({ cat, caption, src })) };
+  }
+  authH() { return { Authorization: 'Bearer ' + (sessionStorage.getItem('bc-admin') || '') }; }
+  async login(e) {
+    e && e.preventDefault();
+    const pw = this.state.pwInput || '';
+    this.setState({ loginBusy: true, loginErr: '' });
+    try {
+      const r = await fetch(this.API + '/login', { method: 'POST', headers: { Authorization: 'Bearer ' + pw } });
+      if (!r.ok) throw new Error(r.status === 401 ? 'wrong password' : 'server error');
+      sessionStorage.setItem('bc-admin', pw);
+      this.setState({ admin: true, loginOpen: false, pwInput: '', loginBusy: false, gStyle: 'sheet' });
+    } catch (err) {
+      this.setState({ loginBusy: false, loginErr: err.message === 'wrong password' ? 'not quite. try again.' : "can't reach the editing server yet." });
+    }
+  }
+  async shrink(file) {
+    try {
+      const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      const k = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
+      const c = document.createElement('canvas'); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+      return await new Promise(res => c.toBlob(b => res(b || file), 'image/jpeg', 0.85));
+    } catch { return file; }
+  }
+  async upload(file) {
+    const blob = await this.shrink(file);
+    const r = await fetch(this.API + '/upload', { method: 'POST', headers: { ...this.authH(), 'Content-Type': blob.type || 'image/jpeg' }, body: blob });
+    if (!r.ok) throw new Error('upload failed');
+    return (await r.json()).url;
+  }
+  async onFiles(ev) {
+    const files = Array.from(ev.target.files || []); ev.target.value = '';
+    if (!files.length || !this.state.ed) return;
+    this.setState({ edMsg: 'uploading ' + files.length + (files.length > 1 ? ' photos…' : ' photo…'), edErr: false });
+    try {
+      for (const f of files) {
+        const url = await this.upload(f);
+        this.setState(s => { const ed = { ...s.ed, f: { ...s.ed.f } };
+          if (ed.type === 'journal') ed.f.images = [...(ed.f.images || []), url];
+          else if (ed.type === 'project') ed.f.img = url; else ed.f.src = url;
+          return { ed }; });
+      }
+      this.setState({ edMsg: 'uploaded.' });
+    } catch { this.setState({ edMsg: 'upload failed. check your connection.', edErr: true }); }
+  }
+  openEd(type, key) {
+    const raw = this.raw(), today = new Date().toISOString().slice(0, 10);
+    let f;
+    if (type === 'journal') f = key != null ? { ...raw.journal.find(e => String(e.id) === String(key)) } : { title: '', date: today, who: this.lastWho || 'ziv', project: '', excerpt: '', body: '', images: [] };
+    else if (type === 'project') f = key != null ? { ...raw.projects.find(p => p.id === key) } : { id: '', title: '', owners: [this.lastWho || 'ziv'], status: 'in progress', year: new Date().getFullYear(), blurb: '', note: '', img: '', ratio: '4/3', play: '', code: '' };
+    else f = key != null ? { ...raw.gallery[key] } : { src: '', caption: '', cat: 'tangyuan' };
+    this.setState({ ed: { type, key, f }, edMsg: '', edErr: false, drawer: null });
+  }
+  async putContent(raw) {
+    const r = await fetch(this.API + '/content', { method: 'PUT', headers: { ...this.authH(), 'Content-Type': 'application/json' }, body: JSON.stringify(raw, null, 2) });
+    if (r.status === 401) { sessionStorage.removeItem('bc-admin'); this.setState({ admin: false }); throw new Error('signed out — please sign in again'); }
+    if (!r.ok) throw new Error('could not save');
+    this.apply(raw);
+  }
+  async saveEd() {
+    const { ed } = this.state; if (!ed) return;
+    const raw = this.raw(), f = { ...ed.f };
+    if (ed.type === 'journal') {
+      if (!f.title || !f.date) return this.setState({ edMsg: 'needs a title and a date.', edErr: true });
+      this.lastWho = f.who;
+      if (ed.key == null) { f.id = 'j' + Date.now().toString(36); raw.journal.unshift(f); }
+      else raw.journal = raw.journal.map(e => String(e.id) === String(ed.key) ? f : e);
+    } else if (ed.type === 'project') {
+      if (!f.title) return this.setState({ edMsg: 'needs a title.', edErr: true });
+      if (!f.owners || !f.owners.length) return this.setState({ edMsg: 'pick who made it.', edErr: true });
+      if (ed.key == null) {
+        let id = f.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'project', n = 2, base = id;
+        while (raw.projects.some(p => p.id === id)) id = base + '-' + n++;
+        f.id = id; raw.projects.unshift(f);
+      } else raw.projects = raw.projects.map(p => p.id === ed.key ? f : p);
+    } else {
+      if (!f.src) return this.setState({ edMsg: 'add a photo first.', edErr: true });
+      if (ed.key == null) raw.gallery.unshift(f); else raw.gallery[ed.key] = f;
+    }
+    this.setState({ edMsg: 'saving…', edErr: false });
+    try { await this.putContent(raw); this.setState({ ed: null }); }
+    catch (err) { this.setState({ edMsg: err.message + '.', edErr: true }); }
+  }
+  async deleteEd() {
+    const { ed } = this.state; if (!ed || ed.key == null) return;
+    if (!window.confirm('Delete this for good?')) return;
+    const raw = this.raw();
+    if (ed.type === 'journal') raw.journal = raw.journal.filter(e => String(e.id) !== String(ed.key));
+    else if (ed.type === 'project') raw.projects = raw.projects.filter(p => p.id !== ed.key);
+    else raw.gallery.splice(ed.key, 1);
+    this.setState({ edMsg: 'deleting…' });
+    try { await this.putContent(raw); this.setState({ ed: null }); }
+    catch (err) { this.setState({ edMsg: err.message + '.', edErr: true }); }
   }
   componentDidUpdate() { this.revealPaws && this.revealPaws(); }
   componentWillUnmount() { cancelAnimationFrame(this.raf); window.removeEventListener('scroll', this.onScroll); this.ro && this.ro.disconnect(); window.removeEventListener('keydown', this.onKey); window.removeEventListener('resize', this.onResize); }
@@ -488,14 +726,15 @@ class Component extends DCLogic {
       const imgs = e.images || [];
       g.items.push({ ...e, day: +d, color: s.color, who: e.who, project: pBy[e.proj] ? pBy[e.proj].title : '', images: imgs.map(src => ({ src })), hasImages: open && imgs.length > 0, sign: s.name.toLowerCase(),
         read: Math.max(1, Math.round((e.body.length + e.excerpt.length) / 160)) + ' min', open, cta: open ? 'close' : 'read entry',
-        toggle: () => this.setState(s2 => ({ open: { ...s2.open, [e.id]: !s2.open[e.id] } })) });
+        toggle: () => this.setState(s2 => ({ open: { ...s2.open, [e.id]: !s2.open[e.id] } })),
+        edit: ev => { ev && ev.stopPropagation(); this.openEd('journal', e.id); } });
     });
     const projs = this.PROJECTS.filter(p => all || p.owners.includes(sib));
     const dp = st.drawer && pBy[st.drawer];
     const dLogs = dp ? this.ENTRIES.filter(e => e.proj === dp.id) : [];
-    const gs = st.gStyle || P.galleryStyle || 'sheet';
+    const gs = st.admin ? 'sheet' : (st.gStyle || P.galleryStyle || 'sheet');
     const SPAN = [[2,2],[1,1],[1,2],[1,1],[2,1],[1,1],[1,1],[2,2],[1,1],[1,2],[1,1],[2,1]];
-    const photos = this.PHOTOS.map((p, i) => ({ ...p, slot: 'gallery-' + (i + 1), frame: (i + 1) + 'A',
+    const photos = this.PHOTOS.map((p, i) => ({ ...p, slot: 'gallery-' + (i + 1), frame: (i + 1) + 'A', edit: () => this.openEd('photo', i),
       rot: [-5, 3, -2, 6, -4, 2, -6, 4, -3, 5, -1, 3][i] + 'deg', dy: [0, 14, -6, 10, -12, 4, 8, -4, 12, -8, 6, 0][i] + 'px', cs: SPAN[i][0], rs: SPAN[i][1],
       who: p.cat === 'both' ? '汤圆 + 年糕' : p.cat === 'niangao' ? '年糕' : '汤圆' }))
       .filter(p => st.catTab === 'all' || p.cat === st.catTab || p.cat === 'both');
@@ -531,8 +770,29 @@ class Component extends DCLogic {
       projects: projs.map((p, i) => ({ ...p, color: pColor(p), owners: pOwners(p), tape: (i % 2 ? 3 : -4) + 'deg', imgLabel: p.title + ' image', hasImg: !!p.img, noImg: !p.img,
         logCount: this.ENTRIES.filter(e => e.proj === p.id).length + ' entries', open: () => this.setState({ drawer: p.id }) })),
       drawerOpen: !!dp, closeDrawer: () => this.setState({ drawer: null }),
+      admin: !!st.admin,
+      openLogin: () => this.setState(st.admin ? { } : { loginOpen: true, loginErr: '' }),
+      loginOpen: !!st.loginOpen, closeLogin: () => this.setState({ loginOpen: false }),
+      pwInput: st.pwInput || '', onPw: e => this.setState({ pwInput: e.target.value }),
+      doLogin: e => this.login(e), loginErr: st.loginErr || '', loginCta: st.loginBusy ? 'checking…' : 'sign in',
+      signOut: () => { sessionStorage.removeItem('bc-admin'); this.setState({ admin: false, ed: null }); },
+      newEntry: () => this.openEd('journal'), newProject: () => this.openEd('project'), newPhoto: () => this.openEd('photo'),
+      edOpen: !!st.ed, closeEd: () => this.setState({ ed: null }),
+      ed: st.ed ? st.ed.f : {},
+      edTitle: st.ed ? (st.ed.key == null ? 'New ' : 'Edit ') + ({ journal: 'entry', project: 'project', photo: 'cat photo' })[st.ed.type] : '',
+      edJournal: !!st.ed && st.ed.type === 'journal', edProject: !!st.ed && st.ed.type === 'project', edPhoto: !!st.ed && st.ed.type === 'photo',
+      edCanDelete: !!st.ed && st.ed.key != null,
+      onField: e => { const { name, value } = e.target; this.setState(s => ({ ed: { ...s.ed, f: { ...s.ed.f, [name]: name === 'year' ? (parseInt(value, 10) || '') : value } } })); },
+      onFiles: e => this.onFiles(e),
+      edImgs: st.ed && st.ed.f.images ? st.ed.f.images.map((src, i) => ({ src, remove: () => this.setState(s => ({ ed: { ...s.ed, f: { ...s.ed.f, images: s.ed.f.images.filter((_, j) => j !== i) } } })) })) : [],
+      edOwners: ['zii', 'ziv', 'ziu'].map(id => { const on = !!st.ed && (st.ed.f.owners || []).includes(id); return { id, bg: on ? '#1c1916' : 'transparent', fg: on ? '#f3eee5' : '#1c1916',
+        toggle: () => this.setState(s => { const o = s.ed.f.owners || []; return { ed: { ...s.ed, f: { ...s.ed.f, owners: o.includes(id) ? o.filter(x => x !== id) : [...o, id] } } }; }) }; }),
+      edHasImg: !!st.ed && !!st.ed.f.img, edImgCta: st.ed && st.ed.f.img ? 'replace cover image' : '+ cover image',
+      edHasSrc: !!st.ed && !!st.ed.f.src, edSrcCta: st.ed && st.ed.f.src ? 'replace photo' : '+ choose photo',
+      edMsg: st.edMsg || '', edMsgColor: st.edErr ? '#a33a2e' : '#5f574c',
+      saveEd: () => this.saveEd(), deleteEd: () => this.deleteEd(), saveCta: 'save',
       gameOpen: !!st.game, gameUrl: st.game ? st.game.url : '', gameTitle: st.game ? st.game.title : '', closeGame: () => this.setState({ game: null }),
-      cur: dp ? { ...dp, openGame: () => this.setState({ game: { url: new URL(dp.play, document.baseURI).href, title: dp.title } }), hasImg: !!dp.img, noImg: !dp.img, hasPlay: !!dp.play, hasCode: !!dp.code, color: pColor(dp), owners: pOwners(dp), logCount: dLogs.length, hasLogs: dLogs.length > 0,
+      cur: dp ? { ...dp, edit: () => this.openEd('project', dp.id), openGame: () => this.setState({ game: { url: new URL(dp.play, document.baseURI).href, title: dp.title } }), hasImg: !!dp.img, noImg: !dp.img, hasPlay: !!dp.play, hasCode: !!dp.code, color: pColor(dp), owners: pOwners(dp), logCount: dLogs.length, hasLogs: dLogs.length > 0,
         logs: dLogs.map(e => ({ title: e.title, date: e.d.replace(/-/g, '·') })),
         readAll: () => { this.setState({ drawer: null, proj: dp.id, sib: 'all', q: '' }); setTimeout(() => this.go('journals'), 50); } } : {},
       q: st.q, onQ: e => this.setState({ q: e.target.value }),
