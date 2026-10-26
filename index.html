@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>batcat — projects &amp; journals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#f3eee5;color:#1c1916;-webkit-font-smoothing:antialiased}
+a{color:#1c1916;text-decoration:underline;text-decoration-color:#c9bfae;text-underline-offset:3px}a:hover{color:#7a5a1e;text-decoration-color:#7a5a1e}
+::selection{background:#1c1916;color:#f3eee5}
+input::placeholder{color:#9a9183}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c1916"></rect><text x="50" y="64" text-anchor="middle" font-family="Georgia,serif" font-size="44" fill="#d9b56a">bc</text></svg></template>
+
+<div ref="{{ rootRef }}" style="position:relative;min-height:100vh;background:#f3eee5;font-family:'Libre Caslon Text',Georgia,serif;color:#1c1916">
+
+  <header style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:14px clamp(18px,4vw,56px);background:rgba(243,238,229,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #ddd4c4">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <span style="width:34px;height:34px;background-image:url(assets/batcat-mono.png);background-size:250%;background-position:50.5% 45.6%;mix-blend-mode:multiply"></span>
+      <span style="font-family:'Libre Caslon Display',serif;font-size:24px;letter-spacing:.01em">batcat</span>
+    </a>
+    <nav style="display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em">
+      <a href="#projects" onClick="{{ goProjects }}" style="text-decoration:none;color:#5f574c">projects</a>
+      <a href="#journals" onClick="{{ goJournals }}" style="text-decoration:none;color:#5f574c">journals</a>
+      <a href="#cat" onClick="{{ goCat }}" style="text-decoration:none;color:#5f574c">The Cats</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:12px">
+      <span style="color:#9a9183;margin-right:6px">reading</span>
+      <sc-for list="{{ switcher }}" as="w" hint-placeholder-count="4">
+        <button onClick="{{ w.select }}" style="display:flex;align-items:center;gap:6px;border:none;background:{{ w.bg }};color:{{ w.fg }};padding:6px 10px;border-radius:4px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;transition:background .2s">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ w.color }}"></span>{{ w.label }}
+        </button>
+      </sc-for>
+    </div>
+  </header>
+
+  <!-- HERO: day / night -->
+  <section id="top" style="position:relative;overflow:hidden;border-bottom:1px solid #ddd4c4">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,#17120b,#0a0806 65%);clip-path:circle({{ nightR }} at {{ nightX }} {{ nightY }});transition:clip-path .9s cubic-bezier(.6,0,.2,1)"></div>
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:clamp(32px,5vw,64px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto">
+      <div style="position:relative;width:min(560px,88vw);aspect-ratio:1">
+        <svg ref="{{ ringRef }}" viewBox="0 0 200 200" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+          <defs><path id="bc-ring" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"></path></defs>
+          <circle cx="100" cy="100" r="96" fill="none" stroke="{{ ringLine }}" stroke-width=".4"></circle>
+          <circle cx="100" cy="100" r="77" fill="none" stroke="{{ ringLine }}" stroke-width=".4"></circle>
+          <text style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px" text-anchor="middle">
+            <textPath href="#bc-ring" startOffset="8.33%" onClick="{{ r0.select }}" onMouseEnter="{{ r0.enter }}" onMouseLeave="{{ r0.leave }}" fill="{{ r0.fill }}" style="cursor:pointer;transition:fill .3s">ZII</textPath>
+            <textPath href="#bc-ring" startOffset="25%" fill="{{ ringStar }}">✶</textPath>
+            <textPath href="#bc-ring" startOffset="41.67%" onClick="{{ r1.select }}" onMouseEnter="{{ r1.enter }}" onMouseLeave="{{ r1.leave }}" fill="{{ r1.fill }}" style="cursor:pointer;transition:fill .3s">ZIV</textPath>
+            <textPath href="#bc-ring" startOffset="58.33%" fill="{{ ringStar }}">✶</textPath>
+            <textPath href="#bc-ring" startOffset="75%" onClick="{{ r2.select }}" onMouseEnter="{{ r2.enter }}" onMouseLeave="{{ r2.leave }}" fill="{{ r2.fill }}" style="cursor:pointer;transition:fill .3s">ZIU</textPath>
+            <textPath href="#bc-ring" startOffset="91.67%" fill="{{ ringStar }}">✶</textPath>
+          </text>
+        </svg>
+        <div style="position:absolute;left:5%;top:5%;width:90%;aspect-ratio:1;pointer-events:none;-webkit-mask-image:radial-gradient(circle closest-side at 50% 50%,#000 62%,transparent 80%);mask-image:radial-gradient(circle closest-side at 50% 50%,#000 62%,transparent 80%)">
+          <div style="position:absolute;inset:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 74%,transparent 76.5%);mask-image:linear-gradient(#000 74%,transparent 76.5%)">
+            <img src="assets/batcat-gold.png" alt="" style="position:absolute;top:0;left:0;width:112.3%;max-width:none;margin-left:-6.1%;margin-top:-3.4%;mix-blend-mode:screen;opacity:{{ goldOp }};transition:opacity .7s"></img>
+          </div>
+        </div>
+        <div style="position:absolute;left:5%;top:5%;width:90%;aspect-ratio:1/0.745;overflow:hidden;pointer-events:none">
+          <img src="assets/batcat-mono.png" alt="Batcat logo" style="position:absolute;top:0;left:0;width:109.6%;max-width:none;margin-left:-5%;margin-top:-2.1%;mix-blend-mode:multiply;opacity:{{ monoOp }};transition:opacity .6s"></img>
+        </div>
+        <div onMouseEnter="{{ logoEnter }}" onMouseLeave="{{ logoLeave }}" onClick="{{ logoClick }}" title="pet the cat" style="position:absolute;left:30%;top:27%;width:40%;aspect-ratio:1;border-radius:50%;cursor:pointer"></div>
+      </div>
+      <span style="font-family:Caveat,cursive;font-size:24px;line-height:1;color:{{ heroAccent }};transition:color .6s;text-align:center">{{ heroHint }}</span>
+    </div>
+  </section>
+
+  <!-- US -->
+  <section style="padding:clamp(56px,8vw,110px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(32px,5vw,72px)">
+      <sc-for list="{{ siblings }}" as="s" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:18px;opacity:{{ s.dim }};transition:opacity .3s">
+          <span style="font-family:Caveat,cursive;font-size:34px;line-height:1;color:{{ s.color }};transform:rotate({{ s.rot }});align-self:flex-start">{{ s.handle }}</span>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+              <span style="font-family:'Libre Caslon Display',serif;font-size:36px;line-height:1">{{ s.name }}</span>
+              <span style="font-style:italic;color:#7a7266">{{ s.legal }}</span>
+            </div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:#4a443c;text-wrap:pretty">{{ s.bio }}</p>
+            <span style="font-family:Caveat,cursive;font-size:23px;color:{{ s.color }};line-height:1.2">now: {{ s.now }}</span>
+            <button onClick="{{ s.select }}" style="align-self:flex-start;margin-top:6px;background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">{{ s.cta }}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid #ddd4c4">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+      <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;margin:0">Projects</h2>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7266">{{ projLabel }}</span>
+    </div>
+    <div style="columns:290px 3;column-gap:32px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+        <div onClick="{{ p.open }}" style="break-inside:avoid;display:inline-block;width:100%;margin:0 0 36px;cursor:pointer;background:#fbf9f4;padding:16px 16px 22px;box-sizing:border-box;box-shadow:0 1px 2px rgba(28,25,22,.08),0 10px 28px rgba(28,25,22,.05);transform:rotate({{ p.rot }});transition:transform .3s ease, box-shadow .3s;position:relative" style-hover="transform:rotate(0deg) translateY(-4px);box-shadow:0 2px 4px rgba(28,25,22,.1),0 18px 40px rgba(28,25,22,.1)">
+          <span style="position:absolute;top:-10px;left:50%;width:84px;height:22px;transform:translateX(-50%) rotate({{ p.tape }});background:rgba(214,200,170,.55)"></span>
+          <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}">
+            <img src="{{ p.img }}" alt="{{ p.title }}" style="display:block;width:100%;aspect-ratio:{{ p.ratio }};object-fit:cover"></img>
+          </sc-if>
+          <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}">
+            <div style="aspect-ratio:{{ p.ratio }};background:repeating-linear-gradient(135deg,#e6dfd2 0 8px,#ede7dc 8px 16px);display:flex;align-items:flex-end;padding:10px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8577">{{ p.imgLabel }}</div>
+          </sc-if>
+          <div style="display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em">
+            <span style="color:{{ p.color }}">{{ p.owners }}</span>
+            <span style="color:#7a7266">{{ p.status }} · {{ p.year }}</span>
+          </div>
+          <h3 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:32px;line-height:1.05;margin:8px 0 8px">{{ p.title }}</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#4a443c;text-wrap:pretty">{{ p.blurb }}</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px">
+            <span style="font-family:Caveat,cursive;font-size:22px;color:{{ p.color }}">{{ p.note }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266;white-space:nowrap">{{ p.logCount }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- JOURNALS -->
+  <section id="journals" style="padding:clamp(40px,6vw,80px) clamp(18px,4vw,56px);max-width:1320px;margin:0 auto;border-top:1px solid #ddd4c4">
+    <div style="display:grid;grid-template-columns:{{ jCols }};gap:clamp(28px,5vw,80px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:22px;position:{{ jPos }};top:90px;background:#f3eee5;z-index:2">
+        <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;margin:0">Journals</h2>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#4a443c;max-width:22em">Dated notes from inside the projects. Open any entry to read it in full.</p>
+        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">search
+          <input value="{{ q }}" onChange="{{ onQ }}" placeholder="cable, rover, lid…" style="font-family:'Libre Caslon Text',serif;font-size:18px;padding:10px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none"></input>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">project
+          <select value="{{ projFilter }}" onChange="{{ onProj }}" style="font-family:'Libre Caslon Text',serif;font-size:17px;padding:9px 0;border:none;border-bottom:1px solid #1c1916;background:transparent;color:#1c1916;outline:none;cursor:pointer">
+            <option value="all">All projects</option>
+            <sc-for list="{{ projOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.title }}</option></sc-for>
+          </select>
+        </label>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7266">{{ journalLabel }}</span>
+        <sc-if value="{{ hasJFilters }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ clearJ }}" style="align-self:flex-start;background:none;border:none;border-bottom:1px solid #1c1916;padding:2px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916">clear filters</button>
+        </sc-if>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:44px;min-width:0">
+        <sc-for list="{{ months }}" as="m" hint-placeholder-count="2">
+          <div style="display:flex;flex-direction:column">
+            <h3 style="font-family:'Libre Caslon Text',serif;font-style:italic;font-weight:400;font-size:22px;color:#7a7266;margin:0 0 6px">{{ m.label }}</h3>
+            <sc-for list="{{ m.items }}" as="e" hint-placeholder-count="3">
+              <div onClick="{{ e.toggle }}" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid #ddd4c4;cursor:pointer">
+                <span style="font-family:'Libre Caslon Display',serif;font-size:44px;line-height:.9;color:{{ e.color }}">{{ e.day }}</span>
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                  <div style="display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7a7266">
+                    <span style="color:{{ e.color }}">{{ e.who }}</span><span>{{ e.project }}</span><span>{{ e.read }}</span>
+                  </div>
+                  <span style="font-family:'Libre Caslon Display',serif;font-size:clamp(24px,2.4vw,32px);line-height:1.1">{{ e.title }}</span>
+                  <p style="margin:0;font-size:17px;line-height:1.6;color:#4a443c;text-wrap:pretty">{{ e.excerpt }}</p>
+                  <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:4px 0 0;font-size:17px;line-height:1.65;color:#2e2a25;text-wrap:pretty;white-space:pre-line">{{ e.body }}</p>
+                    <sc-if value="{{ e.hasImages }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:10px;margin-top:6px">
+                        <sc-for list="{{ e.images }}" as="im" hint-placeholder-count="2">
+                          <img src="{{ im.src }}" alt="" loading="lazy" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e6dfd2"></img>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                    <span style="font-family:Caveat,cursive;font-size:24px;color:{{ e.color }}">— {{ e.sign }}</span>
+                  </sc-if>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1c1916;text-decoration:underline;text-underline-offset:3px">{{ e.cta }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noEntries }}" hint-placeholder-val="{{ false }}">
+          <p style="font-family:Caveat,cursive;font-size:30px;color:#7a7266;margin:0">Nothing written about that yet.</p>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CATS -->
+  <section id="cat" style="background:#1c1916;color:#f3eee5">
+    <div style="padding:clamp(56px,8vw,110px) clamp(18px,4vw,56px) clamp(32px,4vw,56px);max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5vw,80px);align-items:center">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+        <div style="background:#f3eee5;padding:12px 12px 44px;transform:rotate(-1.5deg);width:min(100%,400px);box-sizing:border-box;box-shadow:0 12px 30px rgba(0,0,0,.35);position:relative;z-index:1">
+          <div style="aspect-ratio:3/4;position:relative"><image-slot id="cat-both" shape="rect" placeholder="Tangyuan &amp; Niangao" src="assets/photo-both-basket.jpg"></image-slot></div>
+          <span style="position:absolute;left:14px;bottom:6px;font-family:Caveat,cursive;font-size:28px;color:#1c1916">tangyuan &amp; niangao</span>
+        </div>
+        <div style="display:flex;gap:18px;justify-content:center;width:min(100%,520px);margin-top:-6px;position:relative;z-index:2">
+          <div style="background:#f3eee5;padding:10px 10px 38px;transform:rotate(-5deg);width:44%;box-shadow:0 12px 30px rgba(0,0,0,.4);position:relative">
+            <div style="aspect-ratio:1;position:relative"><image-slot id="cat-tangyuan" shape="rect" placeholder="Tangyuan" src="assets/photo-tangyuan.jpg"></image-slot></div>
+            <span style="position:absolute;left:12px;bottom:4px;font-family:Caveat,cursive;font-size:26px;color:#1c1916">tangyuan</span>
+          </div>
+          <div style="background:#f3eee5;padding:10px 10px 38px;transform:rotate(4deg) translateY(18px);width:44%;box-shadow:0 12px 30px rgba(0,0,0,.4);position:relative">
+            <div style="aspect-ratio:1;position:relative"><image-slot id="cat-niangao" shape="rect" placeholder="Niangao" src="assets/photo-niangao.png"></image-slot></div>
+            <span style="position:absolute;left:12px;bottom:4px;font-family:Caveat,cursive;font-size:26px;color:#1c1916">niangao</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#a59c8d">The Cats</span>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+          <img src="assets/tangyuan-logo.png" alt="Tangyuan" style="width:84px;height:84px;display:block;transform:rotate(4deg)"></img>
+          <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(44px,5.4vw,80px);line-height:.95;margin:0">Tangyuan</h2>
+          <span style="font-size:clamp(26px,2.6vw,36px);color:#d9b56a">汤圆</span>
+        </div>
+        <p style="margin:0;font-size:18px;line-height:1.6;color:#d6cfc3;max-width:28em;text-wrap:pretty">Our tuxedo cat, named after the sweet rice balls traditionally filled with black sesame. His face inspired the logo, so yes, the little face you see up there is actually him.</p>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+          <button onClick="{{ pet }}" style="cursor:pointer;background:#f3eee5;color:#1c1916;border:none;padding:12px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px" style-hover="background:#d9b56a">pet him</button>
+          <span style="font-family:Caveat,cursive;font-size:28px;color:#d9b56a">{{ meowText }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:18px;align-items:start;margin-top:10px;padding-top:26px;border-top:1px solid #3a342d">
+          <img src="assets/niangao-logo.png" alt="Niangao" onClick="{{ petN }}" title="pet niangao" style="width:72px;height:72px;display:block;cursor:pointer;transform:rotate({{ nTilt }});transition:transform .35s cubic-bezier(.3,1.6,.5,1)"></img>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+              <h2 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(34px,3.6vw,52px);line-height:.95;margin:0">Niangao</h2>
+              <span style="font-size:clamp(22px,2vw,28px);color:#d9b56a">年糕</span>
+            </div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:#d6cfc3;max-width:28em;text-wrap:pretty">Our seal-point Ragdoll, named after the chewy Chinese rice cake. Another traditional treat, another very good cat.</p>
+            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+              <button onClick="{{ petN }}" style="cursor:pointer;background:#f3eee5;color:#1c1916;border:none;padding:12px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px" style-hover="background:#a9c7e0">pet him</button>
+              <span style="font-family:Caveat,cursive;font-size:28px;color:#a9c7e0">{{ nMeowText }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:clamp(24px,4vw,56px) clamp(18px,4vw,56px) clamp(56px,8vw,110px);max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#a59c8d">{{ gLabel }} · {{ photoCount }}</span>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px">
+          <sc-for list="{{ gStyles }}" as="g" hint-placeholder-count="4">
+            <button onClick="{{ g.select }}" style="border:none;border-bottom:1px solid {{ g.line }};background:transparent;color:{{ g.fg }};padding:6px 8px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ g.label }}</button>
+          </sc-for>
+          <span style="width:1px;background:#3a342d;margin:0 10px"></span>
+          <sc-for list="{{ catTabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.select }}" style="border:1px solid #3a342d;background:{{ t.bg }};color:{{ t.fg }};padding:6px 12px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;transition:background .2s">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <sc-if value="{{ gSheet }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));column-gap:0;row-gap:26px">
+        <sc-for list="{{ photos }}" as="ph" hint-placeholder-count="8">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:#0d0b09;padding:20px 5px;position:relative">
+              <span style="position:absolute;left:0;right:0;top:5px;height:9px;background:repeating-linear-gradient(90deg,transparent 0 7px,#3d362e 7px 15px,transparent 15px 22px)"></span>
+              <span style="position:absolute;left:0;right:0;bottom:5px;height:9px;background:repeating-linear-gradient(90deg,transparent 0 7px,#3d362e 7px 15px,transparent 15px 22px)"></span>
+              <div style="aspect-ratio:3/2;position:relative"><image-slot id="{{ ph.slot }}" shape="rect" placeholder="{{ ph.who }}" src="{{ ph.src }}"></image-slot></div>
+              <span style="position:absolute;right:8px;bottom:-1px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#d9b56a;letter-spacing:.08em">{{ ph.frame }}</span>
+            </div>
+            <span style="font-family:Caveat,cursive;font-size:22px;line-height:1.1;color:#e6dfd2;padding:0 8px">{{ ph.caption }}</span>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+      <sc-if value="{{ gPile }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;padding:20px 0 30px">
+          <sc-for list="{{ photos }}" as="ph" hint-placeholder-count="8">
+            <div style="width:clamp(150px,19vw,220px);margin:-6px -10px;background:#f3eee5;padding:10px 10px 46px;box-sizing:border-box;box-shadow:0 10px 26px rgba(0,0,0,.45);transform:rotate({{ ph.rot }}) translateY({{ ph.dy }});transition:transform .3s;position:relative;z-index:1" style-hover="transform:rotate(0deg) scale(1.08);z-index:5">
+              <div style="aspect-ratio:1;position:relative"><image-slot id="{{ ph.slot }}" shape="rect" placeholder="{{ ph.who }}" src="{{ ph.src }}"></image-slot></div>
+              <span style="position:absolute;left:12px;right:12px;bottom:10px;font-family:Caveat,cursive;font-size:21px;line-height:1;color:#1c1916;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ ph.caption }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ gMosaic }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));grid-auto-rows:170px;grid-auto-flow:dense;gap:8px">
+          <sc-for list="{{ photos }}" as="ph" hint-placeholder-count="8">
+            <div style="grid-column:span {{ ph.cs }};grid-row:span {{ ph.rs }};position:relative;overflow:hidden">
+              <image-slot id="{{ ph.slot }}" shape="rect" placeholder="{{ ph.who }}" src="{{ ph.src }}"></image-slot>
+              <span style="position:absolute;right:10px;top:8px;pointer-events:none;font-family:Caveat,cursive;font-size:22px;color:#f3eee5;text-shadow:0 1px 6px rgba(0,0,0,.6)">{{ ph.caption }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ gBooth }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,4vw,48px);padding:10px 0">
+          <sc-for list="{{ strips }}" as="s" hint-placeholder-count="3">
+            <div style="width:clamp(150px,16vw,190px);background:#f3eee5;padding:10px 10px 4px;box-shadow:0 12px 30px rgba(0,0,0,.4);transform:rotate({{ s.rot }});display:flex;flex-direction:column;gap:4px">
+              <sc-for list="{{ s.frames }}" as="ph" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <div style="aspect-ratio:1;position:relative"><image-slot id="{{ ph.slot }}" shape="rect" placeholder="{{ ph.who }}" src="{{ ph.src }}"></image-slot></div>
+                  <span style="font-family:Caveat,cursive;font-size:18px;line-height:1.15;color:#1c1916;padding:0 2px 4px">{{ ph.caption }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <div onMouseEnter="{{ peekIn }}" onMouseLeave="{{ peekOut }}" onClick="{{ peekIn }}" title="?" style="position:fixed;right:0;bottom:22%;z-index:25;display:flex;align-items:center;gap:10px;background:#f3eee5;padding:8px 14px 8px 8px;border-radius:44px 0 0 44px;box-shadow:0 6px 20px rgba(28,25,22,.18);transform:translateX({{ peekX }});transition:transform .45s cubic-bezier(.3,1.4,.5,1);cursor:pointer">
+    <img src="assets/niangao-logo.png" alt="" style="width:52px;height:52px;flex:none;display:block"></img>
+    <span style="font-family:Caveat,cursive;font-size:22px;color:#1c1916;white-space:nowrap">niangao says hi</span>
+  </div>
+
+  <footer style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px clamp(18px,4vw,56px) 36px;background:#1c1916;color:#8d8577;border-top:1px solid #2e2a25;font-family:'IBM Plex Mono',monospace;font-size:11px">
+    <span>batcat · zii, ziv &amp; ziu wang</span>
+    <span style="display:flex;align-items:center;gap:8px">supervised by
+      <img src="assets/tangyuan-logo.png" alt="" style="width:24px;height:24px"></img>
+      <img src="assets/niangao-logo.png" alt="" style="width:24px;height:24px"></img>
+    </span>
+  </footer>
+
+  <!-- PROJECT DRAWER -->
+  <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;z-index:40;background:rgba(28,25,22,.4)"></div>
+    <aside style="position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(560px,100vw);background:#f3eee5;box-shadow:-20px 0 60px rgba(0,0,0,.2);overflow-y:auto;display:flex;flex-direction:column;gap:20px;padding:28px clamp(20px,4vw,40px) 48px;box-sizing:border-box">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:{{ cur.color }}">{{ cur.owners }}</span>
+        <button onClick="{{ closeDrawer }}" style="background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916;text-decoration:underline">close (esc)</button>
+      </div>
+      <h3 style="font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1;margin:0">{{ cur.title }}</h3>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7266">{{ cur.status }} · {{ cur.year }}</span>
+      <sc-if value="{{ cur.hasImg }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ cur.img }}" alt="{{ cur.title }}" style="display:block;width:100%;aspect-ratio:{{ cur.ratio }};object-fit:cover"></img>
+      </sc-if>
+      <sc-if value="{{ cur.noImg }}" hint-placeholder-val="{{ false }}">
+        <div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#e6dfd2 0 8px,#ede7dc 8px 16px);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8577">project photos</div>
+      </sc-if>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <sc-if value="{{ cur.hasPlay }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ cur.openGame }}" style="background:#1c1916;color:#f3eee5;border:none;cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px">play it →</button>
+        </sc-if>
+        <sc-if value="{{ cur.hasCode }}" hint-placeholder-val="{{ false }}">
+          <a href="{{ cur.code }}" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:12px">code on GitHub ↗</a>
+        </sc-if>
+      </div>
+      <p style="margin:0;font-size:18px;line-height:1.6;color:#2e2a25;text-wrap:pretty">{{ cur.blurb }}</p>
+      <span style="font-family:Caveat,cursive;font-size:26px;color:{{ cur.color }}">{{ cur.note }}</span>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #1c1916;padding-top:14px;gap:2px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266;margin-bottom:6px">journal entries · {{ cur.logCount }}</span>
+        <sc-for list="{{ cur.logs }}" as="l" hint-placeholder-count="2">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:12px 0;border-bottom:1px solid #ddd4c4">
+            <span style="font-size:18px">{{ l.title }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7266">{{ l.date }}</span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ cur.hasLogs }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ cur.readAll }}" style="align-self:flex-start;margin-top:16px;background:#1c1916;color:#f3eee5;border:none;padding:12px 18px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px">read these in the journal →</button>
+        </sc-if>
+      </div>
+    </aside>
+  </sc-if>
+  <sc-if value="{{ gameOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;background:rgba(28,25,22,.72);display:flex;align-items:center;justify-content:center;padding:clamp(8px,3vw,40px)">
+      <div style="width:min(1100px,100%);height:min(860px,100%);background:#f3eee5;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.4)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #ddd4c4">
+          <span style="font-family:'Libre Caslon Display',serif;font-size:24px">{{ gameTitle }}</span>
+          <div style="display:flex;gap:16px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px">
+            <a href="{{ gameUrl }}" target="_blank" rel="noopener" style="color:#5f574c">open in new tab</a>
+            <button onClick="{{ closeGame }}" style="background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#1c1916;text-decoration:underline">close (esc)</button>
+          </div>
+        </div>
+        <iframe src="{{ gameUrl }}" title="{{ gameTitle }}" style="flex:1;width:100%;border:none;background:#fff"></iframe>
+      </div>
+    </div>
+  </sc-if>
+  {{ pawLayer }}
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultSibling&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;zii&quot;,&quot;ziv&quot;,&quot;ziu&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;startAtNight&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;galleryStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sheet&quot;,&quot;pile&quot;,&quot;mosaic&quot;,&quot;booth&quot;],&quot;default&quot;:&quot;sheet&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ringSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:0.3,&quot;step&quot;:0.01,&quot;default&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { sib: null, hover: false, pinned: null, ox: '78%', oy: '50%', drawer: null, q: '', proj: 'all', open: {}, meows: 0, ringHot: null, catTab: 'all', peek: false, gStyle: null, nMeows: 0 };
+  ringRef = React.createRef(); rootRef = React.createRef(); pawRef = React.createRef();
+  SIBS = [
+    { id: 'zii', name: 'Ziyi', legal: 'Ziyi Wang', color: 'oklch(0.52 0.11 65)', rot: '-2deg', bio: 'Studied mathematics and now works on AI research, with a focus on teaching robots to learn and act. His projects span research, engineering, and experiments that bring the two together.', now: 'teaching Rover-01 to avoid the rug' },
+    { id: 'ziv', name: 'Violet', legal: 'Ziwei Wang', color: 'oklch(0.52 0.11 290)', rot: '-1deg', bio: 'Studied business and computer science, and likes building little software projects and exploring ideas along the way.', now: 'writing the about page' },
+    { id: 'ziu', name: 'Lavender', legal: 'Zijuan Wang', color: 'oklch(0.52 0.11 340)', rot: '1.5deg', bio: 'Studies life sciences and spends her spare time knitting. This is where her patterns, works in progress, and finished pieces live.', now: 'on the second sleeve' },
+  ];
+  PROJECTS = [
+    { id: 'feeder', title: 'Night Feeder', owners: ['zii', 'ziv', 'ziu'], status: 'in progress', year: 2026, ratio: '4/3', rot: '-1deg', note: 'he is winning', blurb: 'Our one joint project: a timed feeder so Tangyuan can eat at 3am without waking anyone up.' },
+    { id: 'rover', title: 'Rover-01', owners: ['zii'], status: 'in progress', year: 2026, ratio: '1/1', rot: '1.2deg', note: 'wheels v3', blurb: 'A palm-sized rover that maps the house at night and reports where both cats are sleeping.' },
+    { id: 'cardigan', title: 'Cable Cardigan', owners: ['ziu'], status: 'in progress', year: 2026, ratio: '3/4', rot: '-0.6deg', note: 'one sleeve to go', blurb: 'A cream wool cardigan with cables up the front, knit from her own adapted pattern.' },
+    { id: 'socks', title: 'Sock Drawer', owners: ['ziu'], status: 'in progress', year: 2026, ratio: '1/1', rot: '1.6deg', note: '7 pairs', blurb: 'One pair of socks a month, each testing a new heel or yarn.' },
+    { id: 'weather', title: 'Pixel Weather', owners: ['zii'], status: 'finished', year: 2025, ratio: '4/5', rot: '-1.4deg', note: 'still running', blurb: 'An e-ink weather station on the windowsill that redraws the sky every hour.' },
+    { id: 'hat', title: 'Colorwork Hat Pattern', owners: ['ziu'], status: 'finished', year: 2025, ratio: '4/5', rot: '0.5deg', note: 'pattern written up', blurb: 'A two-color hat with a cat-ear motif around the brim. The chart and notes are in the journal.' },
+    { id: 'catchess', title: 'Cat Chess', owners: ['ziv'], status: 'playable', year: 2026, ratio: '1/1', rot: '-0.9deg', note: 'tuxedos vs. ragdolls', img: 'assets/proj-catchess.png', play: 'projects/catchess/index.html', blurb: 'Chess with cat pieces, pass-and-play or against a simple computer. The rules run on a C++ chess engine compiled to WebAssembly.' },
+    { id: 'p24', title: '24 Points', owners: ['ziv'], status: 'playable', year: 2026, ratio: '4/3', rot: '1.1deg', note: '8 ÷ (3 − 8 ÷ 3)', img: 'assets/proj-24.png', play: 'projects/twentyfour/web/index.html', blurb: 'The 24-point card game: combine four cards with + − × ÷ to make 24. The solver is written in C and compiled to WebAssembly, and there is a terminal version too.' },
+    { id: 'chess', title: 'Tiny Chess Engine', owners: ['zii'], status: 'paused', year: 2025, ratio: '1/1', rot: '1deg', note: 'beats dad', blurb: 'A small chess engine written from scratch. It beats our dad and loses to everyone else.' },
+  ];
+  ENTRIES = [
+    { id: 1, who: 'ziv', proj: 'feeder', d: '2026-10-21', title: 'She figured out the lid in a day', excerpt: 'We spent two weekends on the latch. He opened it before breakfast.', body: 'The first prototype used a magnet latch. By morning it was open and the bowl was empty. Niangao watched him do it and took notes. zii wants a servo lock; ziu thinks we should just feed him at 3am ourselves. Back to the drawing board, with a lot more respect for the users.' },
+    { id: 2, who: 'zii', proj: 'rover', d: '2026-10-17', title: 'First map of the hallway', excerpt: 'Lidar works, wheels slip on the rug.', body: 'The map looks like a cat drew it, which feels appropriate. It also found Niangao asleep under the radiator, twice. Next: rubber treads, and slowing down before the rug instead of after.' },
+    { id: 3, who: 'ziu', proj: 'cardigan', d: '2026-10-12', title: 'Cable chart, revised', excerpt: 'Moved the cables two stitches in so they sit flat.', body: 'The first chart pulled the front edges inward. Revised it so the cables start two stitches from the button band, and swapped to a smaller needle for the ribbing. Chart and swatch photos below.' },
+    { id: 5, who: 'ziu', proj: 'socks', d: '2026-09-28', title: 'Trying a fleegle heel', excerpt: 'No picked-up stitches, no gaps.', body: 'Pair seven uses a fleegle heel instead of a heel flap. Faster, and it fits better over the instep. Writing it into the template for next month.' },
+    { id: 6, who: 'zii', proj: 'weather', d: '2026-09-20', title: 'One year on the windowsill', excerpt: 'Three battery swaps, zero missed updates.', body: 'The case has faded in the sun and one corner is chewed (not by me). Writing up what I would change for v2: bigger panel, USB-C, cat-proof stand.' },
+    { id: 7, who: 'ziv', proj: 'p24', d: '2026-09-09', title: 'Making 24', excerpt: 'Started with a solver, then built the game around it.', body: 'The C solver tries every ordering of the four cards, every operator triple and all five ways to bracket them, and returns the answer packed into one integer. The page unpacks it for hints and "show solution", and only deals hands that can make 24.' },
+    { id: 10, who: 'ziv', proj: 'catchess', d: '2026-10-04', title: 'Checking the engine with perft', excerpt: 'perft(5) = 4,865,609. All five depths match.', body: 'Counting legal move sequences from the start position against known totals is how I know castling, en passant, promotion and check are right. The computer is still one ply: take a mate, grab the best capture, otherwise a little random. Minimax is next.' },
+    { id: 9, who: 'ziu', proj: 'cardigan', d: '2026-10-08', title: 'Niangao found the yarn basket', excerpt: 'Two skeins, one fluffy paperweight.', body: 'Left the basket open for ten minutes. Came back to Niangao curled on the cream wool, very pleased. The yarn survived, with extra fur. The basket now has a lid.' },
+    { id: 8, who: 'ziu', proj: 'feeder', d: '2026-09-02', title: 'Sketches for a cat-proof lid', excerpt: 'Three ideas, all of them probably wrong.', body: 'A sliding door, a twist lock and a puzzle box. Tangyuan watched the whole time, which I think counts as user research.' },
+  ];
+  MEOWS = ['mrrp.', 'meow.', 'purrrr…', 'mrow?', 'niangao wanders over.', 'now both want pets.', 'he leaves.', 'he is back.'];
+  NMEOWS = ['slow blink.', 'goes completely limp. ragdoll mode.', 'purrs like a tiny engine.', 'flops onto his back.', 'tangyuan comes to check.', 'demands more.'];
+  PHOTOS = [
+    { cat: 'tangyuan', caption: 'on the fluffy bed', src: 'assets/gallery/g01.jpg' },
+    { cat: 'niangao', caption: 'chair nap', src: 'assets/gallery/g02.jpg' },
+    { cat: 'tangyuan', caption: 'guarding the box', src: 'assets/gallery/g03.jpg' },
+    { cat: 'niangao', caption: 'umbrella shelter', src: 'assets/gallery/g04.jpg' },
+    { cat: 'tangyuan', caption: 'full moon mode', src: 'assets/gallery/g05.jpg' },
+    { cat: 'both', caption: 'a little too close', src: 'assets/gallery/g06.jpg' },
+    { cat: 'both', caption: 'two beds, two loaves', src: 'assets/gallery/g07.jpg' },
+    { cat: 'both', caption: 'nap shift', src: 'assets/gallery/g08.jpg' },
+    { cat: 'niangao', caption: 'holding paws', src: 'assets/gallery/g09.jpg' },
+  ];
+  componentDidMount() {
+    let a = 0;
+    const tick = () => {
+      const r = this.ringRef.current, sp = this.props.ringSpeed ?? 0.05;
+      if (r) { if (this.state.ringHot == null) a += sp; r.style.transform = `rotate(${a}deg)`; }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.onKey = e => { if (e.key === 'Escape') this.setState(this.state.game ? { game: null } : { drawer: null }); };
+    window.addEventListener('keydown', this.onKey);
+    this.onResize = () => { const w = window.innerWidth >= 900; if (w !== this.state.wide) this.setState({ wide: w }); };
+    window.addEventListener('resize', this.onResize); this.onResize();
+    this.layoutPaws = () => {
+      const root = this.rootRef.current; if (!root) return;
+      const H = root.scrollHeight, W = root.clientWidth;
+      if (this.pawDims && this.pawDims[0] === H && this.pawDims[1] === W) return;
+      this.pawDims = [H, W];
+      const pts = [], A = W * 0.42, P = 560;
+      for (let y = 760, i = 0; y < H - 140; y += 44, i++) {
+        const x = W * 0.5 + A * Math.sin(y / P), d = A * Math.cos(y / P) / P;
+        const len = Math.hypot(d, 1), nx = -1 / len, ny = d / len, side = i % 2 ? 8 : -8;
+        pts.push({ x: x + nx * side, y: y + ny * side, r: Math.atan2(1, d) * 180 / Math.PI + 90 });
+      }
+      this.setState({ paws: pts }, () => this.revealPaws());
+    };
+    this.revealPaws = () => {
+      const lim = window.scrollY + window.innerHeight * 0.8;
+      for (const c of document.querySelectorAll('svg[data-paw]')) { const on = +c.dataset.y < lim; c.style.opacity = on ? '.42' : '0'; c.style.transform = c.dataset.rot + (on ? ' scale(1)' : ' scale(.4)'); }
+    };
+    this.onScroll = () => { if (!this.revealPaws) return; if (!this.sTick) { this.sTick = true; requestAnimationFrame(() => { this.sTick = false; this.revealPaws(); }); } };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.ro = new ResizeObserver(() => this.layoutPaws());
+    if (this.rootRef.current) this.ro.observe(this.rootRef.current);
+    this.layoutPaws();
+    fetch('content.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d) return;
+      const rots = ['-1deg', '1.2deg', '-0.6deg', '0.8deg', '1.6deg', '-1.4deg', '0.5deg', '-0.9deg', '1deg'];
+      const srot = ['-2deg', '-1deg', '1.5deg'];
+      if (d.siblings) this.SIBS = d.siblings.map((s, i) => ({ rot: srot[i % 3], ...s }));
+      if (d.projects) this.PROJECTS = d.projects.map((p, i) => ({ ratio: '1/1', rot: rots[i % rots.length], ...p, owners: [].concat(p.owners || []) }));
+      if (d.journal) this.ENTRIES = d.journal.map((e, i) => ({ id: e.id ?? 'j' + i, who: e.who, proj: e.project, d: String(e.date || '').slice(0, 10), title: e.title || '', excerpt: e.excerpt || '', body: e.body || '', images: (e.images || []).map(x => typeof x === 'string' ? x : x && (x.image || x.src)).filter(Boolean) }))
+        .filter(e => e.d).sort((a, b) => b.d.localeCompare(a.d));
+      if (d.gallery) this.PHOTOS = d.gallery;
+      this.pawDims = null; this.forceUpdate(() => setTimeout(() => this.layoutPaws(), 300));
+    }).catch(() => {});
+  }
+  componentDidUpdate() { this.revealPaws && this.revealPaws(); }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); window.removeEventListener('scroll', this.onScroll); this.ro && this.ro.disconnect(); window.removeEventListener('keydown', this.onKey); window.removeEventListener('resize', this.onResize); }
+  go(id) { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' }); }
+  origin(ev) {
+    const sec = document.getElementById('top'); if (!sec) return {};
+    const r = sec.getBoundingClientRect();
+    return { ox: (ev.clientX - r.left) + 'px', oy: (ev.clientY - r.top) + 'px' };
+  }
+  renderVals() {
+    const st = this.state, P = this.props;
+    const sib = st.sib ?? (P.defaultSibling || 'all');
+    const all = sib === 'all';
+    const by = Object.fromEntries(this.SIBS.map(s => [s.id, s]));
+    const pBy = Object.fromEntries(this.PROJECTS.map(p => [p.id, p]));
+    const night = st.pinned != null ? st.pinned : (st.hover || !!P.startAtNight);
+    const pColor = p => p.owners.length > 1 || !by[p.owners[0]] ? '#1c1916' : by[p.owners[0]].color;
+    const pOwners = p => p.owners.length > 1 ? 'zii + ziv + ziu' : p.owners[0];
+    const setSib = id => this.setState({ sib: sib === id ? 'all' : id });
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const q = st.q.trim().toLowerCase();
+    const ents = this.ENTRIES.filter(e => (all || e.who === sib) && (st.proj === 'all' || e.proj === st.proj) &&
+      (!q || (e.title + ' ' + e.excerpt + ' ' + e.body + ' ' + (pBy[e.proj] ? pBy[e.proj].title : '')).toLowerCase().includes(q)));
+    const groups = [];
+    ents.forEach(e => {
+      const [y, m, d] = e.d.split('-'); const label = months[+m - 1] + ' ' + y;
+      let g = groups.find(g => g.label === label); if (!g) groups.push(g = { label, items: [] });
+      const open = !!st.open[e.id], s = by[e.who] || { color: '#1c1916', name: e.who || '' };
+      const imgs = e.images || [];
+      g.items.push({ ...e, day: +d, color: s.color, who: e.who, project: pBy[e.proj] ? pBy[e.proj].title : '', images: imgs.map(src => ({ src })), hasImages: open && imgs.length > 0, sign: s.name.toLowerCase(),
+        read: Math.max(1, Math.round((e.body.length + e.excerpt.length) / 160)) + ' min', open, cta: open ? 'close' : 'read entry',
+        toggle: () => this.setState(s2 => ({ open: { ...s2.open, [e.id]: !s2.open[e.id] } })) });
+    });
+    const projs = this.PROJECTS.filter(p => all || p.owners.includes(sib));
+    const dp = st.drawer && pBy[st.drawer];
+    const dLogs = dp ? this.ENTRIES.filter(e => e.proj === dp.id) : [];
+    const gs = st.gStyle || P.galleryStyle || 'sheet';
+    const SPAN = [[2,2],[1,1],[1,2],[1,1],[2,1],[1,1],[1,1],[2,2],[1,1],[1,2],[1,1],[2,1]];
+    const photos = this.PHOTOS.map((p, i) => ({ ...p, slot: 'gallery-' + (i + 1), frame: (i + 1) + 'A',
+      rot: [-5, 3, -2, 6, -4, 2, -6, 4, -3, 5, -1, 3][i] + 'deg', dy: [0, 14, -6, 10, -12, 4, 8, -4, 12, -8, 6, 0][i] + 'px', cs: SPAN[i][0], rs: SPAN[i][1],
+      who: p.cat === 'both' ? '汤圆 + 年糕' : p.cat === 'niangao' ? '年糕' : '汤圆' }))
+      .filter(p => st.catTab === 'all' || p.cat === st.catTab || p.cat === 'both');
+    const ringFill = s => night ? (st.ringHot === s.id || sib === s.id ? '#e6c47a' : '#b8ab92') : (st.ringHot === s.id || sib === s.id ? s.color : '#1c1916');
+    return {
+      ringRef: this.ringRef, rootRef: this.rootRef,
+      pawLayer: React.createElement('div', { ref: this.pawRef, 'aria-hidden': true, style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 20, overflow: 'hidden' } },
+        (st.paws || []).map((p, i) => React.createElement('svg', { key: i, 'data-paw': '1', viewBox: '0 0 20 20', width: 18, height: 18, 'data-y': p.y, 'data-rot': 'rotate(' + p.r + 'deg)',
+          style: { position: 'absolute', left: p.x - 9, top: p.y - 9, opacity: 0, transform: 'rotate(' + p.r + 'deg) scale(.4)', transition: 'opacity .5s ease, transform .5s cubic-bezier(.3,1.5,.5,1)' }, fill: '#9a8a73' },
+          React.createElement('ellipse', { cx: 10, cy: 13, rx: 4.6, ry: 4 }),
+          React.createElement('ellipse', { cx: 4.2, cy: 8, rx: 1.8, ry: 2.3 }), React.createElement('ellipse', { cx: 7.6, cy: 4.6, rx: 1.8, ry: 2.4 }),
+          React.createElement('ellipse', { cx: 12.4, cy: 4.6, rx: 1.8, ry: 2.4 }), React.createElement('ellipse', { cx: 15.8, cy: 8, rx: 1.8, ry: 2.3 })))),
+      goProjects: e => { e.preventDefault(); this.go('projects'); },
+      goJournals: e => { e.preventDefault(); this.go('journals'); },
+      goCat: e => { e.preventDefault(); this.go('cat'); },
+      switcher: [{ id: 'all', label: 'all', color: '#1c1916' }, ...this.SIBS.map(s => ({ id: s.id, label: s.id, color: s.color }))].map(w => ({
+        ...w, bg: sib === w.id ? '#1c1916' : 'transparent', fg: sib === w.id ? '#f3eee5' : '#5f574c', select: () => this.setState({ sib: w.id }) })),
+      nightR: night ? '160%' : '0%', nightX: st.ox, nightY: st.oy,
+      heroInk: night ? '#f3eee5' : '#1c1916', heroMuted: night ? '#b8ab92' : '#5f574c', heroAccent: night ? '#e6c47a' : '#1c1916',
+      heroHint: st.pinned === true ? 'night. click him again for daylight.' : st.pinned === false ? 'daylight. click him for night.' : night ? 'lights out. click to keep it dark.' : 'hover over the cat — he likes the dark.',
+      ringLine: night ? '#3a3122' : '#cfc5b4',
+      monoOp: night ? 0 : 1, goldOp: night ? 1 : 0,
+      ...Object.fromEntries(this.SIBS.map((s, i) => ['r' + i, { fill: ringFill(s),
+        select: () => setSib(s.id), enter: () => this.setState({ ringHot: s.id }), leave: () => this.setState({ ringHot: null }) }])),
+      ringStar: night ? '#6b5a3a' : '#a59c8d',
+      logoEnter: ev => this.setState({ hover: true, ...this.origin(ev) }),
+      logoLeave: () => this.setState({ hover: false }),
+      logoClick: ev => { const o = this.origin(ev); this.setState({ pinned: !night, ...o }); },
+      siblings: this.SIBS.map(s => ({ ...s, handle: s.id, dim: all || sib === s.id ? 1 : 0.4,
+        cta: sib === s.id ? 'show everyone' : 'only ' + s.name + "'s work →",
+        select: () => { setSib(s.id); if (sib !== s.id) setTimeout(() => this.go('projects'), 50); } })),
+      projLabel: (all ? 'everyone' : by[sib].name) + ' · ' + projs.length + ' projects',
+      projects: projs.map((p, i) => ({ ...p, color: pColor(p), owners: pOwners(p), tape: (i % 2 ? 3 : -4) + 'deg', imgLabel: p.title + ' image', hasImg: !!p.img, noImg: !p.img,
+        logCount: this.ENTRIES.filter(e => e.proj === p.id).length + ' entries', open: () => this.setState({ drawer: p.id }) })),
+      drawerOpen: !!dp, closeDrawer: () => this.setState({ drawer: null }),
+      gameOpen: !!st.game, gameUrl: st.game ? st.game.url : '', gameTitle: st.game ? st.game.title : '', closeGame: () => this.setState({ game: null }),
+      cur: dp ? { ...dp, openGame: () => this.setState({ game: { url: new URL(dp.play, document.baseURI).href, title: dp.title } }), hasImg: !!dp.img, noImg: !dp.img, hasPlay: !!dp.play, hasCode: !!dp.code, color: pColor(dp), owners: pOwners(dp), logCount: dLogs.length, hasLogs: dLogs.length > 0,
+        logs: dLogs.map(e => ({ title: e.title, date: e.d.replace(/-/g, '·') })),
+        readAll: () => { this.setState({ drawer: null, proj: dp.id, sib: 'all', q: '' }); setTimeout(() => this.go('journals'), 50); } } : {},
+      q: st.q, onQ: e => this.setState({ q: e.target.value }),
+      projFilter: st.proj, onProj: e => this.setState({ proj: e.target.value }),
+      projOptions: this.PROJECTS.map(p => ({ id: p.id, title: p.title })),
+      journalLabel: ents.length + (ents.length === 1 ? ' entry' : ' entries') + (all ? '' : ' by ' + by[sib].name),
+      hasJFilters: !!q || st.proj !== 'all', clearJ: () => this.setState({ q: '', proj: 'all' }),
+      months: groups, noEntries: !ents.length,
+      jCols: st.wide ? 'minmax(240px,320px) minmax(0,1fr)' : 'minmax(0,1fr)', jPos: st.wide ? 'sticky' : 'static',
+      photoCount: photos.length + ' photos',
+      gLabel: { sheet: 'contact sheet', pile: 'polaroid pile', mosaic: 'mosaic', booth: 'photo booth' }[gs],
+      gSheet: gs === 'sheet', gPile: gs === 'pile', gMosaic: gs === 'mosaic', gBooth: gs === 'booth',
+      gStyles: [['sheet', 'sheet'], ['pile', 'polaroids'], ['mosaic', 'mosaic'], ['booth', 'booth']].map(([id, label]) => ({ label,
+        fg: gs === id ? '#f3eee5' : '#8d8577', line: gs === id ? '#d9b56a' : 'transparent', select: () => this.setState({ gStyle: id }) })),
+      strips: Array.from({ length: Math.ceil(photos.length / 4) }, (_, i) => ({ rot: [-2, 1.5, -1, 2][i % 4] + 'deg', frames: photos.slice(i * 4, i * 4 + 4) })),
+      photos,
+      catTabs: [['all', 'both'], ['tangyuan', 'tangyuan 汤圆'], ['niangao', 'niangao 年糕']].map(([id, label]) => ({ label,
+        bg: st.catTab === id ? '#f3eee5' : 'transparent', fg: st.catTab === id ? '#1c1916' : '#d6cfc3', select: () => this.setState({ catTab: id }) })),
+      peekX: st.peek ? '0' : 'calc(100% - 34px)',
+      peekIn: () => this.setState({ peek: true }), peekOut: () => this.setState({ peek: false }),
+      petN: () => this.setState(s => ({ nMeows: s.nMeows + 1 })),
+      nMeowText: st.nMeows ? this.NMEOWS[(st.nMeows - 1) % this.NMEOWS.length] : '',
+      nTilt: st.nMeows % 2 ? '8deg' : '-6deg',
+      pet: () => this.setState(s => ({ meows: s.meows + 1 })),
+      meowText: st.meows ? this.MEOWS[(st.meows - 1) % this.MEOWS.length] : '',
+    };
+  }
+}
+</script>
+</body>
+</html>

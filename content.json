@@ -1,0 +1,306 @@
+{
+  "siblings": [
+    {
+      "id": "zii",
+      "name": "Ziyi",
+      "legal": "Ziyi Wang",
+      "color": "oklch(0.52 0.11 65)",
+      "bio": "Studied mathematics and now works on AI research, with a focus on teaching robots to learn and act. His projects span research, engineering, and experiments that bring the two together.",
+      "now": "teaching Rover-01 to avoid the rug"
+    },
+    {
+      "id": "ziv",
+      "name": "Violet",
+      "legal": "Ziwei Wang",
+      "color": "oklch(0.52 0.11 290)",
+      "bio": "Studied business and computer science, and likes building little software projects and exploring ideas along the way.",
+      "now": "writing the about page"
+    },
+    {
+      "id": "ziu",
+      "name": "Lavender",
+      "legal": "Zijuan Wang",
+      "color": "oklch(0.52 0.11 340)",
+      "bio": "Studies life sciences and spends her spare time knitting. This is where her patterns, works in progress, and finished pieces live.",
+      "now": "on the second sleeve"
+    }
+  ],
+  "projects": [
+    {
+      "id": "feeder",
+      "title": "Night Feeder",
+      "owners": [
+        "zii",
+        "ziv",
+        "ziu"
+      ],
+      "status": "in progress",
+      "year": 2026,
+      "ratio": "4/3",
+      "note": "he is winning",
+      "blurb": "Our one joint project: a timed feeder so Tangyuan can eat at 3am without waking anyone up.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "rover",
+      "title": "Rover-01",
+      "owners": [
+        "zii"
+      ],
+      "status": "in progress",
+      "year": 2026,
+      "ratio": "1/1",
+      "note": "wheels v3",
+      "blurb": "A palm-sized rover that maps the house at night and reports where both cats are sleeping.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "cardigan",
+      "title": "Cable Cardigan",
+      "owners": [
+        "ziu"
+      ],
+      "status": "in progress",
+      "year": 2026,
+      "ratio": "3/4",
+      "note": "one sleeve to go",
+      "blurb": "A cream wool cardigan with cables up the front, knit from her own adapted pattern.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "socks",
+      "title": "Sock Drawer",
+      "owners": [
+        "ziu"
+      ],
+      "status": "in progress",
+      "year": 2026,
+      "ratio": "1/1",
+      "note": "7 pairs",
+      "blurb": "One pair of socks a month, each testing a new heel or yarn.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "weather",
+      "title": "Pixel Weather",
+      "owners": [
+        "zii"
+      ],
+      "status": "finished",
+      "year": 2025,
+      "ratio": "4/5",
+      "note": "still running",
+      "blurb": "An e-ink weather station on the windowsill that redraws the sky every hour.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "hat",
+      "title": "Colorwork Hat Pattern",
+      "owners": [
+        "ziu"
+      ],
+      "status": "finished",
+      "year": 2025,
+      "ratio": "4/5",
+      "note": "pattern written up",
+      "blurb": "A two-color hat with a cat-ear motif around the brim. The chart and notes are in the journal.",
+      "img": "",
+      "play": "",
+      "code": ""
+    },
+    {
+      "id": "catchess",
+      "title": "Cat Chess",
+      "owners": [
+        "ziv"
+      ],
+      "status": "playable",
+      "year": 2026,
+      "ratio": "1/1",
+      "note": "tuxedos vs. ragdolls",
+      "blurb": "Chess with cat pieces, pass-and-play or against a simple computer. The rules run on a C++ chess engine compiled to WebAssembly.",
+      "img": "assets/proj-catchess.png",
+      "play": "https://chess.bat-cat.net",
+      "code": "https://github.com/ziv-vw/cat-chess"
+    },
+    {
+      "id": "p24",
+      "title": "24 Points",
+      "owners": [
+        "ziv"
+      ],
+      "status": "playable",
+      "year": 2026,
+      "ratio": "4/3",
+      "note": "8 ÷ (3 − 8 ÷ 3)",
+      "blurb": "The 24-point card game: combine four cards with + − × ÷ to make 24. The solver is written in C and compiled to WebAssembly, and there is a terminal version too.",
+      "img": "assets/proj-24.png",
+      "play": "https://24.bat-cat.net",
+      "code": "https://github.com/ziv-vw/twentyfour"
+    },
+    {
+      "id": "chess",
+      "title": "Tiny Chess Engine",
+      "owners": [
+        "zii"
+      ],
+      "status": "paused",
+      "year": 2025,
+      "ratio": "1/1",
+      "note": "beats dad",
+      "blurb": "A small chess engine written from scratch. It beats our dad and loses to everyone else.",
+      "img": "",
+      "play": "",
+      "code": ""
+    }
+  ],
+  "journal": [
+    {
+      "id": 1,
+      "who": "ziv",
+      "project": "feeder",
+      "date": "2026-10-21",
+      "title": "She figured out the lid in a day",
+      "excerpt": "We spent two weekends on the latch. He opened it before breakfast.",
+      "body": "The first prototype used a magnet latch. By morning it was open and the bowl was empty. Niangao watched him do it and took notes. zii wants a servo lock; ziu thinks we should just feed him at 3am ourselves. Back to the drawing board, with a lot more respect for the users.",
+      "images": []
+    },
+    {
+      "id": 2,
+      "who": "zii",
+      "project": "rover",
+      "date": "2026-10-17",
+      "title": "First map of the hallway",
+      "excerpt": "Lidar works, wheels slip on the rug.",
+      "body": "The map looks like a cat drew it, which feels appropriate. It also found Niangao asleep under the radiator, twice. Next: rubber treads, and slowing down before the rug instead of after.",
+      "images": []
+    },
+    {
+      "id": 3,
+      "who": "ziu",
+      "project": "cardigan",
+      "date": "2026-10-12",
+      "title": "Cable chart, revised",
+      "excerpt": "Moved the cables two stitches in so they sit flat.",
+      "body": "The first chart pulled the front edges inward. Revised it so the cables start two stitches from the button band, and swapped to a smaller needle for the ribbing. Chart and swatch photos below.",
+      "images": []
+    },
+    {
+      "id": 9,
+      "who": "ziu",
+      "project": "cardigan",
+      "date": "2026-10-08",
+      "title": "Niangao found the yarn basket",
+      "excerpt": "Two skeins, one fluffy paperweight.",
+      "body": "Left the basket open for ten minutes. Came back to Niangao curled on the cream wool, very pleased. The yarn survived, with extra fur. The basket now has a lid.",
+      "images": []
+    },
+    {
+      "id": 10,
+      "who": "ziv",
+      "project": "catchess",
+      "date": "2026-10-04",
+      "title": "Checking the engine with perft",
+      "excerpt": "perft(5) = 4,865,609. All five depths match.",
+      "body": "Counting legal move sequences from the start position against known totals is how I know castling, en passant, promotion and check are right. The computer is still one ply: take a mate, grab the best capture, otherwise a little random. Minimax is next.",
+      "images": []
+    },
+    {
+      "id": 5,
+      "who": "ziu",
+      "project": "socks",
+      "date": "2026-09-28",
+      "title": "Trying a fleegle heel",
+      "excerpt": "No picked-up stitches, no gaps.",
+      "body": "Pair seven uses a fleegle heel instead of a heel flap. Faster, and it fits better over the instep. Writing it into the template for next month.",
+      "images": []
+    },
+    {
+      "id": 6,
+      "who": "zii",
+      "project": "weather",
+      "date": "2026-09-20",
+      "title": "One year on the windowsill",
+      "excerpt": "Three battery swaps, zero missed updates.",
+      "body": "The case has faded in the sun and one corner is chewed (not by me). Writing up what I would change for v2: bigger panel, USB-C, cat-proof stand.",
+      "images": []
+    },
+    {
+      "id": 7,
+      "who": "ziv",
+      "project": "p24",
+      "date": "2026-09-09",
+      "title": "Making 24",
+      "excerpt": "Started with a solver, then built the game around it.",
+      "body": "The C solver tries every ordering of the four cards, every operator triple and all five ways to bracket them, and returns the answer packed into one integer. The page unpacks it for hints and \"show solution\", and only deals hands that can make 24.",
+      "images": []
+    },
+    {
+      "id": 8,
+      "who": "ziu",
+      "project": "feeder",
+      "date": "2026-09-02",
+      "title": "Sketches for a cat-proof lid",
+      "excerpt": "Three ideas, all of them probably wrong.",
+      "body": "A sliding door, a twist lock and a puzzle box. Tangyuan watched the whole time, which I think counts as user research.",
+      "images": []
+    }
+  ],
+  "gallery": [
+    {
+      "cat": "tangyuan",
+      "caption": "on the fluffy bed",
+      "src": "assets/gallery/g01.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "chair nap",
+      "src": "assets/gallery/g02.jpg"
+    },
+    {
+      "cat": "tangyuan",
+      "caption": "guarding the box",
+      "src": "assets/gallery/g03.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "umbrella shelter",
+      "src": "assets/gallery/g04.jpg"
+    },
+    {
+      "cat": "tangyuan",
+      "caption": "full moon mode",
+      "src": "assets/gallery/g05.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "a little too close",
+      "src": "assets/gallery/g06.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "two beds, two loaves",
+      "src": "assets/gallery/g07.jpg"
+    },
+    {
+      "cat": "both",
+      "caption": "nap shift",
+      "src": "assets/gallery/g08.jpg"
+    },
+    {
+      "cat": "niangao",
+      "caption": "holding paws",
+      "src": "assets/gallery/g09.jpg"
+    }
+  ]
+}
